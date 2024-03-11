@@ -15,11 +15,7 @@ class CatagoryView(View):
 class CatagoryTitle(View):
     def get(self, request, val):
         product = Product.objects.filter(title=val)
-        if product.exists():
-            catagory_products = Product.objects.filter(catagory=product[0].catagory)
-            title = catagory_products.values("title")
-        else:
-            title =[]
+        
         return render(request, "app/catagory.html", locals())
 
 class ProductDetail(View):

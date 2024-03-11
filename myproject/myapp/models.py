@@ -28,31 +28,48 @@ CHOICES_FOR_PRODUCTS= [
 CHOICES_FOR_USERS= [
     ("MC", "Merchant"),
     ("CN", "Consumer"),
+    ("US", "User"),
 ]
+
+class Manufacturer(models.Model):
+    MANUFACTURE_LOCATION_CHOICES = [
+    ("Abu Dhabi", "Abu Dhabi"),
+    ("Dubai", "Dubai"),
+    ("Ajman", "Ajman"),
+    ]
+    product_name = models.CharField(_("Product Name"), max_length=50)
+    manufacturer_name = models.CharField(_("Company Name"), max_length=50,default="Unknown")
+    manufacture_location = models.CharField(_("Location"), max_length=50,choices=MANUFACTURE_LOCATION_CHOICES, default="Abu Dhabi")
+    product_type = models.CharField(_("Product Type"), max_length=50, choices=CHOICES_FOR_PRODUCTS)
+    product_quantity = models.IntegerField(_("Quantity"), default=0)
+    product_mf_date = models.DateTimeField(_("Manufacturing Date"), auto_now=True, auto_now_add=False)
+    product_expiry_date = models.DateTimeField(_("Expiry Date"), auto_now=False, auto_now_add=False,default=datetime.datetime.now)
+
 
 class Products(models.Model):
     product_id = models.CharField(_("Product ID"), max_length=50)
-    product_quantity = models.IntegerField(_("Product Quantity"))
-    product_name = models.CharField(_("Product Name"), max_length=15)
-    product_manufacture_date = models.DateTimeField(_("Date of Manufacture"), auto_now=False, auto_now_add=False)
-    product_type = models.CharField(_("Product Type"), max_length=50, choices=CHOICES_FOR_PRODUCTS)
+    manufacturer = models.ForeignKey(Manufacturer, verbose_name=_(""), on_delete=models.CASCADE)
 
     def save(self, *args, **kwargs):
         if not self.product_id:
             first_two_words = "_".join(self.product_name.split()[:2]).upper()
-            date_manufacture = self.product_manufacture_date.day
+            date_manufacture = self.manfacturer.product_mf_date
             total_products = Products.objects.count() + 1
             self.product_id = f"{first_two_words}{date_manufacture}{total_products}"
+        self.product_name = self.manufacturer.product_name
+        self.manufacturer_name = self.manufacturer.manufacturer_name
+        self.manufacture_location = self.manufacturer.manufacture_location
+        self.product_type = self.manufacturer.product_type
+        self.product_quantity = self.manufacturer.product_quantity
+        self.product_mf_date = self.manufacturer.product_mf_date
+        self.product_expiry_date = self.manufacturer.product_expiry_date
         super().save(*args, **kwargs)
 
-class Manufacturer(models.Model):
-    manufacturer_name = models.CharField(_("Name"), max_length=50,default="Unknown")
-    MANUFACTURE_LOCATION_CHOICES = [
-        ("Abu Dhabi", "Abu Dhabi"),
-        ("Dubai", "Dubai"),
-        ("Ajman", "Ajman"),
-    ]
-    manufacture_location = models.CharField(_("Location"), max_length=50,choices=MANUFACTURE_LOCATION_CHOICES, default="Abu Dhabi")
-    products_details = models.ForeignKey(Products, verbose_name=_("Products details"), on_delete=models.CASCADE)
-    product_quantity = models.IntegerField(_("Quantity"), default=0)
+
+
+
+
+
+ 
+
 

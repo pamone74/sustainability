@@ -47,7 +47,7 @@ class Merchant:
 def main():
     #merchant_instance = Merchant(20, "bottles", admin=True)
 
-    print("this string".upper())
+   print(datetime.datetime.now)
     #print(Merchant.track())
 
 if __name__ == "__main__":
