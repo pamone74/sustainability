@@ -37,35 +37,62 @@ class Manufacturer(models.Model):
     ("Dubai", "Dubai"),
     ("Ajman", "Ajman"),
     ]
-    product_name = models.CharField(_("Product Name"), max_length=50)
+    product_name = models.CharField(_("Product Name"), max_length=50, default="Unknown")
     manufacturer_name = models.CharField(_("Company Name"), max_length=50,default="Unknown")
     manufacture_location = models.CharField(_("Location"), max_length=50,choices=MANUFACTURE_LOCATION_CHOICES, default="Abu Dhabi")
-    product_type = models.CharField(_("Product Type"), max_length=50, choices=CHOICES_FOR_PRODUCTS)
+    product_type = models.CharField(_("Product Type"), max_length=50, choices=CHOICES_FOR_PRODUCTS, default="RC")
     product_quantity = models.IntegerField(_("Quantity"), default=0)
     product_mf_date = models.DateTimeField(_("Manufacturing Date"), auto_now=True, auto_now_add=False)
     product_expiry_date = models.DateTimeField(_("Expiry Date"), auto_now=False, auto_now_add=False,default=datetime.datetime.now)
 
+# 
+# class Products(models.Model):
+    # product_id = models.CharField(_("Product ID"), max_length=50)
+    # manufacturer = models.ForeignKey(Manufacturer, verbose_name=_(""), on_delete=models.CASCADE,default=1)
+    # product_name = models.CharField(_("Product Name"), max_length=50, default="Unknown")
+    # manufacturer_name = models.CharField(_("Company Name"), max_length=50,default="Unknown")
+    # manufacture_location = models.CharField(_("Location"), max_length=50, default="Abu Dhabi")
+    # # product_type = models.CharField(_("Product Type"), max_length=50, choices=CHOICES_FOR_PRODUCTS, default="RC")
+    # product_quantity = models.IntegerField(_("Quantity"), default=0)
+    # product_mf_date = models.DateTimeField(_("Manufacturing Date"), auto_now=True, auto_now_add=False)
+    # # product_expiry_date = models.DateTimeField(_("Expiry Date"), auto_now=False, auto_now_add=False,default=datetime.datetime.now)
+# 
+    # def save(self, *args, **kwargs):
+        # if not self.product_id:
+            # first_two_words = "_".join(self.product_name.split()[:2]).upper()
+            # date_manufacture = self.manfacturer.product_mf_date
+            # total_products = Products.objects.count() + 1
+            # self.product_id = f"{first_two_words}{date_manufacture}{total_products}"
+        # self.product_name = self.manufacturer.product_name
+        # self.manufacturer_name = self.manufacturer.manufacturer_name
+        # self.manufacture_location = self.manufacturer.manufacture_location
+        # self.product_type = self.manufacturer.product_type
+        # self.product_quantity = self.manufacturer.product_quantity
+        # self.product_mf_date = self.manufacturer.product_mf_date
+        # self.product_expiry_date = self.manufacturer.product_expiry_date
+        # super().save(*args, **kwargs)
+# 
 
-class Products(models.Model):
-    product_id = models.CharField(_("Product ID"), max_length=50)
-    manufacturer = models.ForeignKey(Manufacturer, verbose_name=_(""), on_delete=models.CASCADE)
+class Product(models.Model):
+    product_id = models.CharField(_("Product ID"), max_length=50, editable=False, unique=True)
+    manufacturer = models.ForeignKey(Manufacturer, verbose_name=_(""), on_delete=models.CASCADE,default=1)
+    product_name = models.CharField(_("Product Name"), max_length=50, default="Unknown")
+    manufacturer_name = models.CharField(_("Company Name"), max_length=50,default="Unknown")
+    manufacture_location = models.CharField(_("Location"), max_length=50, default="Abu Dhabi")
+    product_type = models.CharField(_("Product Type"), max_length=50, choices=CHOICES_FOR_PRODUCTS, default="RC")
+    product_quantity = models.IntegerField(_("Quantity"), default=0)
+    product_mf_date = models.DateTimeField(_("Manufacturing Date"), auto_now=True, auto_now_add=False)
+    product_expiry_date = models.DateTimeField(_("Expiry Date"), auto_now=False, auto_now_add=False,default=datetime.datetime.now)
+    product_ownership = models.CharField(_("Ownership"), max_length=50, choices=CHOICES_FOR_USERS, default="US")
 
     def save(self, *args, **kwargs):
         if not self.product_id:
             first_two_words = "_".join(self.product_name.split()[:2]).upper()
-            date_manufacture = self.manfacturer.product_mf_date
-            total_products = Products.objects.count() + 1
-            self.product_id = f"{first_two_words}{date_manufacture}{total_products}"
+            first_w_name = "_".join(self.manufacturer_name.split()[:2]).upper()
+            total_products = Product.objects.count() + 1
+            self.product_id = f"{first_two_words}{first_w_name}{total_products}"
         self.product_name = self.manufacturer.product_name
-        self.manufacturer_name = self.manufacturer.manufacturer_name
-        self.manufacture_location = self.manufacturer.manufacture_location
-        self.product_type = self.manufacturer.product_type
-        self.product_quantity = self.manufacturer.product_quantity
-        self.product_mf_date = self.manufacturer.product_mf_date
-        self.product_expiry_date = self.manufacturer.product_expiry_date
         super().save(*args, **kwargs)
-
-
 
 
 
