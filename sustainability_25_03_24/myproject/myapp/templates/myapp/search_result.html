@@ -1,0 +1,38 @@
+{% extends "myapp/base.html" %}
+
+
+{% block content %}
+<div class="container">
+                {% if searched %}
+
+                    <h1>Your search result for  {{searched}}</h1>
+                    {% if product %}
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Product Name</th>
+                                <th>Product Price</th>
+                                <th>Product Quantity</th>
+                                <th>Product Description</th>
+                                <th>Product Image</th>
+                            </tr>
+                        </thead>
+                        {% for items in product %}
+                        <tbody>
+                           <tr> 
+                           <td> {{items.product_name}} </td>
+                           <td> {{items.product_quantity}} </td>
+                           <td> {{items.manufacturer_name}} </td>
+                           <td> {{items.manufacture_location}} </td>    
+                            </tr>
+                        </tbody>
+                        {% endfor %}
+                    </table>
+                        {% else %}
+                        <h1>Product not found</h1>
+                    {% endif %}
+                {% else %}
+                <h1>Hey Please write something</h1>
+                {% endif %}
+    </div>
+{% endblock %}
