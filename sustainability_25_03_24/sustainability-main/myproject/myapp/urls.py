@@ -1,5 +1,9 @@
 from . import views
 from django.urls import path
+from django.contrib.auth import views as auth_views 
+from .forms import LoginForm
+from django.conf import settings 
+from django.conf.urls.static import static
 
 urlpatterns = [
     #Allan's url
@@ -14,4 +18,9 @@ urlpatterns = [
     path("update/<int:pk>/", views.update, name="update_data"), 
     path("add_event", views.add_event, name="add_event"),
     path("recycle", views.recycle, name="recycle"),
-]
+    path("register", views.Registration.as_view(), name="register"),
+    path("account/login/", auth_views.LoginView.as_view(template_name="login.html", authentication_form=LoginForm), name="login"),
+    path("profile/", views.Profileview.as_view(), name="profile"),
+    path("address/", views.Profileview.as_view(), name="address"),
+    path("index/", views.index, name="index"),
+]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

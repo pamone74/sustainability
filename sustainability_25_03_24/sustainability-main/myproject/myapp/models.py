@@ -4,6 +4,7 @@ from django.db import transaction
 from django.utils.translation import gettext as _
 from django.contrib.auth.models import User
 import datetime
+from django_countries.fields import CountryField
 
 '''
 There will be five modoles for this projects: 
@@ -49,8 +50,9 @@ MANUFACTURE_LOCATION_CHOICES = [
 ("FU", "Fujairah"),
 ("RA", "Ras Al Khaimah"),
 ("UM", "Umm Al Quwain"),
-("OT", "Other"),
 ]
+
+
 
 class Manufacturer(models.Model):
     product_name = models.CharField(_("Product Name"), max_length=50,default="Unknown")
@@ -120,3 +122,17 @@ class AddEvent(models.Model):
     event_date = models.DateTimeField(_("Event Date"), auto_now=False, auto_now_add=False)
     event_location = models.CharField(_("Location"), max_length=50)
     event_description = models.TextField(_("Description"), blank=True)
+
+class ProfileUser(models.Model):
+    user = models.OneToOneField(User, verbose_name=_("User"), on_delete=models.CASCADE)
+    address = models.CharField(_("Address"), max_length=50)
+    phone = models.CharField(_("Phone"), max_length=50)
+    full_name = models.CharField(_("Full Name"), max_length=50, null=False, blank=False, default="")
+    city = models.CharField(_("City"), max_length=50,choices=MANUFACTURE_LOCATION_CHOICES, default="AD")
+    country = models.CharField(_("Country"), max_length=50)
+    country_origin = models.CharField(_("Country Origin"), max_length=50, choices=CountryField().countries, default="UAE")
+    date_created = models.DateTimeField(_("Date Created"), auto_now=False, auto_now_add=True)
+    date_updated = models.DateTimeField(_("Date Updated"), auto_now=True, auto_now_add=False)
+
+    def __str__(self):
+        return self.user.username

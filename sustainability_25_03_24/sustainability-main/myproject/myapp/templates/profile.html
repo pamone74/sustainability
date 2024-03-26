@@ -1,0 +1,45 @@
+{% extends "base_login.html" %}
+{% load static %}
+{% block title %}Profile{% endblock title %}
+
+{% block main-content %}
+
+<div class="container my-5">
+    <h3> Welcome <span class="test-capitalize"> {{ user.username}}</span> to your Dashbord </h3>
+    <hr>
+    <div class="row">
+        <div class="col-sm-2 border-end">
+            {% comment %} <img src="{% static 'app/images/profile.jpg' %}" class="img-thumbnail" alt="Profile Picture"> {% endcomment %}
+            <ul class="list-unstyled">
+                <li class="d-grid"> <a href="{% url 'profile' %}" class="btn btn-primary"> Profile </a> </li>
+                <li class="d-grid"> <a href="{% url "address"%}" class="btn"> Address </a> </li>
+                <li class="d-grid"> <a href="#" class="d-grid"> Delete Account </a> </li>
+            </ul>    
+        </div>
+        <div class="col-sm-8 offset-sm-1">
+            <form action="" method="POST">
+                {% csrf_token %}
+                {% for fm in form %}
+                {{ fm.label_tag }} {{ fm }} <small class="text-danger"> {{ fm.errors|striptags }} </small> <br>
+                {% endfor %}
+               
+                <div class="col-12 mt-3">
+                    <button type="submit" class="btn btn-primary"> submit </button>
+                </div>
+                {% if form.non_field_errors %}
+                    {% for err in form.non_field_errors %}
+                        <p class="text-danger"> {{ err }} </p>
+                    {% endfor %}
+                {% endif %}
+                {% if messages %}
+                    {% for msg in messages %}
+                       <div class="alert alert-{{msg.tags}}" role="alert">
+                            {{msg}}
+                       </div>
+                    {% endfor %}
+                {% endif %}
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock main-content %}
