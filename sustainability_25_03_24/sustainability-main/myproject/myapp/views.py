@@ -68,7 +68,7 @@ class Registration(View):
         if form.is_valid():
             form.save()
             messages.success(request, "Registration Successful")
-            #return HttpResponseRedirect("/")
+            # return HttpResponseRedirect("login/")
         else:
             messages.warning(request, "Invalid Data")
         return render(request, "register.html", locals())
@@ -77,7 +77,7 @@ class Registration(View):
 class Profileview(View):
     def get(self, request):
       form = ProfileForm()
-      return render(request, "profile.html", locals())
+      return render(request, "create_profile.html", locals())
     def post(self, request):
         form = ProfileForm(request.POST)
         if form.is_valid():
@@ -88,14 +88,28 @@ class Profileview(View):
             phone = form.cleaned_data["phone"]
             country_progin = form.cleaned_data["country_origin"]
             country = "UAE"
+            email = request.user.email
             reg_date = date.today()
-            reg = ProfileUser(user=user, full_name=name,address=address,city=city, phone=phone, date_created=reg_date,date_updated=reg_date, country=country, country_origin=country_progin)
+            reg = ProfileUser(user=user, full_name=name,address=address,city=city, phone=phone, date_created=reg_date,date_updated=reg_date, country=country, country_origin=country_progin, email=email)
             reg.save()
             messages.success(request, "Profile Updated")
+            return HttpResponseRedirect("/information/")
         else:
             messages.warning(request, "Invalid Data")
         return render(request, "profile.html", locals())
 
+
+
+def Information(request):
+    info = ProfileUser.objects.filter(user=request.user)
+    return render(request, "information.html", locals())
+
+# This is a dummy view function just as a placeholder for the dashboard urls
+def Dummy(request):
+    return render(request, "dummy.html")
+
+def Analytics(request):
+    return render(request, "profile.html")
 # Allan's view functions
 
 def home(request):
@@ -104,8 +118,22 @@ def home(request):
 def index(request):
     return render(request, 'base_login.html', {})
 
-def login(request):
-    return render(request, 'login.html', {})
 
-def navbar(request):
-    return render(request, 'navbar.html', {}) 
+class UpdateInformation(View):
+    def get(self, request, pk):
+        obj = ProfileUser.objects.get(pk=pk)
+        form = ProfileForm(instance=obj)
+        return render(request, "update.html", locals())
+    def post(self, request, pk):
+        obj = ProfileUser.objects.get(pk=pk)
+        form = ProfileForm(request.POST, instance=obj)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Profile Updated")
+            return HttpResponseRedirect("/information/")
+        else:
+            messages.warning(request, "Invalid Data")
+        return render(request, "update.html", locals())
+def Dashboard(request):
+    form = ProfileForm()
+    return render(request, "profile.html", locals())

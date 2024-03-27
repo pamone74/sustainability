@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Information{% endblock title %}
+
+{% block main-content %}
+
+<div class="container my-5">
+    <h3> Welcome <span class="test-capitalize"> {{ data.full_name}}</span> to your Dashbord </h3>
+    <hr>
+    <div class="row">
+        <div class="col-sm-2 border-end" >
+            {% comment %} <img src="{% static 'app/images/profile.jpg' %}" class="img-thumbnail" alt="Profile Picture"> {% endcomment %}
+            <ul class="list-unstyled d-grid gap-2">
+                <li class="d-grid"> <a href="{% url 'information' %}" class="btn btn-primary text-start"> Profile </a> </li>
+                <li class="d-grid"> <a href="{% url 'analytics' %}" class="btn btn-secondary text-start"> Analytics </a> </li>
+                <li class="d-grid"> <a href="{% url "carbon"%}" class="btn btn-secondary text-start">  Carbon Footprint</a> </li>
+                <li class="d-grid"> <a href="{% url "recycables"%}" class="btn btn-secondary text-start"> Pending recycables </a> </li>
+            </ul>    
+        </div>
+        <div class="col-sm-8  offset-sm-1">
+            {% if info %}
+            <div class="row">
+                {% for data in info %}
+                    <div class="col-sm-8">
+                        <div class="card shadow-lg p-3 mb-5 bg-body-tertiary rounded">
+                            <div class="card-body">
+                                <p class="card-title">FULL NAME : {{data.full_name |upper}} </p>
+                                <p class="card-title">CITY : {{data.get_city_display|upper}} </p>
+                                <p class="card-title">PHONE : {{data..phone|upper}} </p>
+                                <p class="card-title">EMAIL : {{data.email}} </p>
+                                <p class="card-title">ADDRESS : {{data.address|upper}} </p>
+                                <p class="card-title">DATE CREATED : {{data.date_created}} </p>
+                                <p class="card-title">DATE UPDATED :
+                                    {{data.date_updated}} </p>
+                                    <br>
+                                <div class="row justify-content-between">
+                                    <div class="col-auto">
+                                        <small> <a href="#" class="btn btn-success"> Update </a></small>
+                                    </div>
+                                    <div class="col-auto">
+                                        <small class="text-end">  <a href="#" class="btn btn-success"> change  Password </a></small>
+                                    </div>
+                                </div>
+                        
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            {% else %}
+                <div class="col-sm-8  offset-sm-1">
+                    <h4>No information found, working on it</h4>
+                    <iframe src="http://127.0.0.1:8000/static/giphy.gif" width="580" height="480" frameBorder="0" class="giphy-embed" allowFullScreen style="overflow: hidden;">
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock main-content %}

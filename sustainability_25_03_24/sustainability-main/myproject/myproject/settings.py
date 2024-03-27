@@ -120,7 +120,7 @@ STATIC_URL = "static/"
 STATICFILE_DIRS= [os.path.join(BASE_DIR, 'static/')]
 STATIC_ROOT= os.path.join(BASE_DIR, 'static')
 LOGIN_REDIRECT_URL = '/index/'
-LOGOUT_REDIRECT_URL = '/'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
@@ -134,3 +134,5 @@ LANGUGES = [
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
