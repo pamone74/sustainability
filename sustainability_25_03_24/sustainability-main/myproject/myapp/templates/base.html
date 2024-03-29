@@ -20,7 +20,7 @@
         <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
         <link rel="stylesheet" href="{% static 'css/w3style.css' %}">
 
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
         <link rel="stylesheet" href="{% static 'app/css/owl.carousel.min.css'%}"/>
         <link rel="stylesheet" href="{% static 'app/css/all.min.css'%}"/>
         <link rel="stylesheet" href="{% static 'app/css/style.css'%}"/>
@@ -145,7 +145,7 @@
                             <div id="mc_embed_signup">
                                 <form target="_blank" action="" method="get" class="subscribe_form relative">
                                     <div class="input-group d-flex flex-row">
-                                        <input name="EMAIL" placeholder="Email Address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email Address '" required="" type="email">
+                                        <input name="EMAIL" autocomplete="off" placeholder="Email Address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email Address '" required="" type="email">
                                         <button class="btn sub-btn"><span class="lnr lnr-location"></span></button>		
                                     </div>									
                                     <div class="mt-10 info"></div>

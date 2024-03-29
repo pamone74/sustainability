@@ -33,6 +33,7 @@ urlpatterns = [
     path("analytics/", views.Analytics, name="analytics"),
     path("carbon/", views.Dummy, name="carbon"),
     path("information/", views.Information, name="information"),
+    path("dashboard/", views.dashboard, name="dashboard"),
 
 # Password Reset
     path("password-change/", auth_views.PasswordChangeView.as_view(template_name="passwordchange.html", form_class=PasswordChangeForm, success_url='/passwordchangedone/'),

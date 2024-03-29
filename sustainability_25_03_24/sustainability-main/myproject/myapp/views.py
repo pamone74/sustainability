@@ -118,6 +118,8 @@ def home(request):
 def index(request):
     return render(request, 'base_login.html', {})
 
+def dashboard(request):
+    return render(request, 'dashboard.html', {})
 
 class UpdateInformation(View):
     def get(self, request, pk):
