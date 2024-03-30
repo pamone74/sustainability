@@ -59,5 +59,9 @@ urlpatterns = [
     path("my-products/", views.display_my_product, name="my_products"),
     path("update-my-products/<int:pk>", views.MyProducts.as_view(), name="update_my_products"),
     path("delete-my-products/<int:pk>", views.DeleteMyProducts.as_view(), name="delete_my_products"),
+
+
+    # Themes
+    path("reduce/", views.reduce, name="reduce"),
     
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

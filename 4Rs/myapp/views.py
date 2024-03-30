@@ -294,3 +294,8 @@ class DeleteMyProducts(View):
         obj = ReuseProducts.objects.get(pk=pk)
         obj.delete()
         return HttpResponseRedirect("/reuse/")
+
+#  Themes For 4RS
+
+def reduce(request):
+    return render(request, 'reduce.html', {})
