@@ -4,7 +4,6 @@ from django.db import transaction
 from django.utils.translation import gettext as _
 from django.contrib.auth.models import User
 import datetime
-from django_countries.fields import CountryField
 
 '''
 There will be five modoles for this projects: 
@@ -130,7 +129,7 @@ class ProfileUser(models.Model):
     full_name = models.CharField(_("Full Name"), max_length=50, null=False, blank=False, default="")
     city = models.CharField(_("City"), max_length=50,choices=MANUFACTURE_LOCATION_CHOICES, default="AD")
     country = models.CharField(_("Country"), max_length=50)
-    country_origin = models.CharField(_("Country Origin"), max_length=50, choices=CountryField().countries, default="UAE")
+    country_origin = models.CharField(_("Country Origin"), max_length=50, default="UAE")
     date_created = models.DateTimeField(_("Date Created"), auto_now=False, auto_now_add=True)
     date_updated = models.DateTimeField(_("Date Updated"), auto_now=True, auto_now_add=False)
     email =     models.EmailField(_("email"), max_length=20, default="")
