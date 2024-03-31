@@ -6,51 +6,294 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>{{user.username |capfirst}} Dashboard</title>
+	<title>Login</title>
+
+	<link rel="stylesheet" href="{% static 'chartist/css/chartist.min.css' %}">
+	<link href="{% static 'bootstrap-select/dist/css/bootstrap-select.min.css' %}" rel="stylesheet">
 	<link href="{% static 'css_dashboard/style.css' %}" rel="stylesheet">
 
 </head>
-<style>
-	body{
-		margin: 6%;
-		margin-top: 0;
-		margin-bottom: 0;
-		width: auto;
-		@media only screen and (min-width: 810px) {
-			margin: 16%;
-			margin-top: 16%;
-			margin-bottom: 0;
-		}
-		@media only screen and (min-width: 910px) {
-			margin: 20%;
-			margin-top: 18%;
-			margin-bottom: 0;
-		}
-		@media only screen and (min-width: 1200px) {
-			margin: 25%;
-			margin-top: 0;
-			margin-bottom: 5%;
-		}
-	}
-</style>
-		<body>	
-		
-				
-					
-			<div class="card">
-							
-								<div class="card overflow-hidden">
-						
-										<div class="text-center">
-											<div class="profile-photo">
-												<img src="{% static 'img/man.png' %}" width="100"
-													class="img-fluid rounded-circle" alt="">
-											</div>
-											<h3 class="mt-4 mb-1">{{user.username |capfirst}}</h3>	
-											{% block main-content %} {% endblock %}
-										</div>
-								
 
+<body>
+	<!--*******************
+        Preloader start
+    ********************-->
+	<div id="preloader">
+		<div class="sk-three-bounce">
+			<div class="sk-child sk-bounce1"></div>
+			<div class="sk-child sk-bounce2"></div>
+			<div class="sk-child sk-bounce3"></div>
+		</div>
+	</div>
+	<!--*******************
+        Preloader end
+    ********************-->
+
+	<!--**********************************
+        Main wrapper start
+    ***********************************-->
+	<div id="main-wrapper">
+
+		<!--**********************************
+            Nav header start
+        ***********************************-->
+		<div class="nav-header">
+			<a href="{% url 'home' %}" class="brand-logo">
+				<i class="logo-abbr fa-brands fa-stumbleupon"></i>
+			</a>
+
+			<div class="nav-control">
+				<div class="hamburger">
+					<span class="line"></span><span class="line"></span><span class="line"></span>
+				</div>
+			</div>
+		</div>
+		<!--**********************************
+            Nav header end
+        ***********************************-->
+
+
+
+		<!--**********************************
+            Header start
+        ***********************************-->
+		<div class="header">
+			<div class="header-content">
+				<nav class="navbar navbar-expand">
+					<div class="collapse navbar-collapse justify-content-between">
+						<div>
+							<div class="dashboard_bar">
+								Dashboard
+							</div>
+						</div>
+						<ul class="navbar-nav header-right">
+							<li class="nav-item">
+								<div class="input-group search-area d-lg-inline-flex d-none">
+									<div class="input-group-append">
+										<span class="input-group-text"><a href="javascript:void(0)"><i
+													class="flaticon-381-search-2"></i></a></span>
+									</div>
+									<input type="text" class="form-control" placeholder="Search here...">
+								</div>
+							</li>
+									
+								<div class="dropdown-menu dropdown-menu-end">
+									<div id="dlab_W_Notification1" class="widget-media dz-scroll p-3 height380">
+										<ul class="timeline">
+											<li>
+												<div class="timeline-panel">
+													<div class="media me-2">
+														<img alt="image" width="50"
+															src="{% static 'image/testtimonial-1.jpg' %}">
+													</div>
+													<div class="media-body">
+														<h6 class="mb-1">Dr sultads Send you Photo</h6>
+														<small class="d-block">29 July 2020 - 02:26 PM</small>
+													</div>
+												</div>
+											</li>
+											<li>
+												<div class="timeline-panel">
+													<div class="media me-2 media-info">
+														KG
+													</div>
+													<div class="media-body">
+														<h6 class="mb-1">Resport created successfully</h6>
+														<small class="d-block">29 July 2020 - 02:26 PM</small>
+													</div>
+												</div>
+											</li>
+											<li>
+												<div class="timeline-panel">
+													<div class="media me-2 media-success">
+														<i class="fa fa-home"></i>
+													</div>
+													<div class="media-body">
+														<h6 class="mb-1">Reminder : Treatment Time!</h6>
+														<small class="d-block">29 July 2020 - 02:26 PM</small>
+													</div>
+												</div>
+											</li>
+											<li>
+												<div class="timeline-panel">
+													<div class="media me-2">
+														<img alt="image" width="50"
+															src="{% static 'image/testtimonial-2.jpg' %}">
+													</div>
+													<div class="media-body">
+														<h6 class="mb-1">Dr sultads Send you Photo</h6>
+														<small class="d-block">29 July 2020 - 02:26 PM</small>
+													</div>
+												</div>
+											</li>
+											<li>
+												<div class="timeline-panel">
+													<div class="media me-2 media-danger">
+														KG
+													</div>
+													<div class="media-body">
+														<h6 class="mb-1">Resport created successfully</h6>
+														<small class="d-block">29 July 2020 - 02:26 PM</small>
+													</div>
+												</div>
+											</li>
+											<li>
+												<div class="timeline-panel">
+													<div class="media me-2 media-primary">
+														<i class="fa fa-home"></i>
+													</div>
+													<div class="media-body">
+														<h6 class="mb-1">Reminder : Treatment Time!</h6>
+														<small class="d-block">29 July 2020 - 02:26 PM</small>
+													</div>
+												</div>
+											</li>
+										</ul>
+									</div>
+									<a class="all-notification" href="javascript:void(0)">See all notifications <i
+											class="ti-arrow-right"></i></a>
+								</div>
+							</li>
+							<li class="nav-item dropdown header-profile">
+								<a class="nav-link" href="javascript:void(0);" role="button" data-bs-toggle="dropdown">
+									<img src="{% static 'img/man (1).png' %}" width="20" alt="" />
+									<div class="header-info">
+										<span>{{user.username |capfirst}}</span>
+									</div>
+								</a>
+								<div class="dropdown-menu dropdown-menu-end">
+									<a href="{% url 'information' %}">	
+										<span class="ms-2"><a href="{% url 'login' %}">Login</a></span>
+									</a>
+									
+								</div>
+							</li>
+						</ul>
+					</div>
+				</nav>
+			</div>
+		</div>
+		<!--**********************************
+            Header end ti-comment-alt
+        ***********************************-->
+
+		<!--**********************************
+            Sidebar start
+        ***********************************-->
+		<div class="deznav">
+			<div class="deznav-scroll">
+				<a class="add-project-sidebar btn btn-primary" href="{% url 'index' %}" data-bs-toggle="modal"
+					data-bs-target="#addProjectSidebar">+ Register / Login</a>
+				<ul class="metismenu" id="menu">
+					<li><a href="{% url 'index' %}">
+							<i class="flaticon-monitor"></i>
+							<span class="nav-text">Home</span>
+						</a>
+					</li>
+					<li><a href="#">
+							<i class="flaticon-bar-chart-1"></i>
+							<span class="nav-text">Reuse</span>
+						</a>
+					</li>
+					<li><a href="#">
+							<i class="flaticon-web"></i>
+							<span class="nav-text">Reduce</span>
+						</a>
+					</li>
+					<li><a href="#">
+							<i class="flaticon-plugin"></i>
+							<span class="nav-text">recycle</span>
+						</a>
+					</li>
+					<li><a href="#">
+							<i class="flaticon-admin"></i>
+							<span class="nav-text">Order</span>
+						</a>
+					</li>
+					<li><a href="#">
+							<i class="flaticon-contract"></i>
+							<span class="nav-text">Recycle</span>
+						</a>
+					</li>
+					<li><a href="#">
+							<i class="flaticon-table"></i>
+							<span class="nav-text">Recover</span>
+						</a>
+					</li>
+					<li><a href="#">
+							<i class="flaticon-newsletter"></i>
+							<span class="nav-text">Form</span>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<!--**********************************
+            Sidebar end
+        ***********************************-->
+			<style>
+				#mar{
+					margin-left: 13%;
+					margin-right: 25%;
+				}
+				#cent{
+					text-align: center;
+					align-items: center;
+					margin-left: 23%;
+				}
+			</style>
+		<!--**********************************
+            Content body start
+        ***********************************-->
+		<div class="content-body">
+			<div class="container-fluid">
+				<!-- Add Project -->
+				<div class="modal fade" id="addProjectSidebar">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id = "cent">Register or Login to Account</h5>
+								<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+							</div>
+							<div class="modal-body">
+								<form action="" method="POST" class="shadow p-5">
+									{% csrf_token %}
+									{% for fm in form %}
+									{{fm.label_tag}} {{fm}} <small class="text-danger">{{fm.errors|striptags}}</small>
+									<br>
+									{% endfor %}
+								
+									<div class="col-12 mt-3">
+										<button type="submit" id = "mar" class="btn btn-primary">Submit</button>
+										<a href="{% url 'address' %}" class="btn btn-secondary">Cancel</a>
+									</div>
+									{% if form.non_field_errors %}
+									{% for err in form.non_field_errors %}
+									<p>{{err}}</p>
+									{% endfor %}
+									{% endif %}
+									{% if messages %}
+
+									{% for msg in messages %}
+									{{msg}}
+									{% endfor %}
+									{% endif %}
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+				{% block main-content %} {% endblock %}
+		
+			</div>
+		</div>
+		<!--**********************************
+            Content body end
+        ***********************************-->
+
+		<!--**********************************
+            Footer start
+        ***********************************-->
 		<div class="footer">
 			<div class="copyright">
 				<p>Copyright &copy;<b><script>document.write(new Date().getFullYear());</script> </b>All rights reserved.</p>
@@ -59,6 +302,10 @@
 		<!--**********************************
             Footer end
         ***********************************-->
+
+
+
+
 	</div>
 	<!--**********************************
         Main wrapper end

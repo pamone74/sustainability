@@ -28,7 +28,17 @@
 	<!--*******************
         Preloader end
     ********************-->
-
+	<style>
+		#mar{
+			margin-left: 13%;
+			margin-right: 25%;
+		}
+		#cent{
+			text-align: center;
+			align-items: center;
+			margin-left: 36%;
+		}
+	</style>
 	<!--**********************************
         Main wrapper start
     ***********************************-->
@@ -312,7 +322,7 @@
 					<div class="modal-dialog" role="document">
 						<div class="modal-content">
 							<div class="modal-header">
-								<h5 class="modal-title">Update Profile</h5>
+								<h5 class="modal-title" id ="cent">Update Profile</h5>
 								<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
 							</div>
 							<div class="modal-body">
@@ -324,7 +334,7 @@
 									{% endfor %}
 									<br>
 									<div class="col-12 mt-3">
-										<button type="submit" class="btn btn-primary">Update</button>
+										<button type="submit" class="btn btn-primary" id = "mar">Update</button>
 										<a href="{% url 'address' %}" class="btn btn-secondary">Cancel</a>
 									</div>
 									{% if form.non_field_errors %}

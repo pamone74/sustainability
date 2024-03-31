@@ -10443,7 +10443,9 @@ html[dir="rtl"] [direction="rtl"][data-sidebar-style="compact"]:not([data-layout
       width: 18rem; } }
   .deznav .deznav-scroll {
     position: relative;
-    height: 100%; }
+    height: 100%;
+    overflow: hidden;
+  }
   @media only screen and (max-width: 1350px) {
     .deznav {
       width: 17rem; } }
