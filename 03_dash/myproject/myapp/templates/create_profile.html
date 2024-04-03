@@ -31,10 +31,10 @@
   border-radius: 6px;
 }
 </style>
-<div class="container">
-    <div class="row">
+<div class="">
+    <div class="">
         <h2> Welcome {{request.user}}</h2>
-        <div class="col-sm-8 offset-sm-1">
+        <div class="">
             <form action="" method="POST">
                 {% csrf_token %}
                 {% for fm in form %}
@@ -44,7 +44,7 @@
                     
                 {% endfor %}
                 <br><br>
-                <div class="col-12 mt-3">
+                <div class="">
                     <button type="submit" class="w3-button-color">Update</button>
                     <a href="{% url 'address' %}" class="w3-button">Cancel</a>
                 </div>

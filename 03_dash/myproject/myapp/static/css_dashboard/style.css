@@ -8280,17 +8280,24 @@ a {
   white-space: nowrap; }
 
 .content-body .container {
-  margin-top: 10px; }
+  margin-top: 10px; 
+}
 
 .content-body .container-fluid, .content-body .container-sm, .content-body .container-md, .content-body .container-lg, .content-body .container-xl, .content-body .container-xxl {
   padding-top: 10px;
   padding-right: 40px;
-  padding-left: 40px; }
-  @media only screen and (max-width: 1200px) {
+  padding-left: 40px; 
+  margin: 0;
+}
+  @media only screen and (min-width: 1200px) {
     .content-body .container-fluid, .content-body .container-sm, .content-body .container-md, .content-body .container-lg, .content-body .container-xl, .content-body .container-xxl {
       padding-top: 30px;
-      padding-right: 30px;
-      padding-left: 30px; } }
+      height: auto;
+      margin-left: 3.5%;
+      margin-right: 3%;
+      margin-bottom: 0;
+    
+    } }
   @media only screen and (max-width: 767px) {
     .content-body .container-fluid, .content-body .container-sm, .content-body .container-md, .content-body .container-lg, .content-body .container-xl, .content-body .container-xxl {
       padding-top: 20px;
@@ -8302,6 +8309,7 @@ a {
       padding-right: 15px;
       padding-left: 15px; } }
 
+      
 /*sp*/
 .row.sp4,
 .sp4 {
@@ -8910,7 +8918,7 @@ a {
 [data-layout="horizontal"] .nav-control {
   display: none; }
 
-@media only screen and (max-width: 767px) {
+@media only screen and (min-width: 767px) {
   [data-sidebar-style="overlay"] .nav-header .logo-abbr {
     display: block; } }
 
