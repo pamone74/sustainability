@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Information{% endblock title %}
+
+{% block main-content %}
+<style>
+    p {
+        text-align: left;
+    }
+</style>
+<div class="container">
+    <div class="col">
+        <h4>Reward Points: </h4>
+        <h4 class="count num-text text-black font-w400">100</h4>
+    </div>
+    <br>
+    <hr class="border border-danger border-3 opacity-50">
+    <div class="row">
+        <div class="col-sm-2 border-end" >
+            {% comment %} <img src="{% static 'app/images/profile.jpg' %}" class="img-thumbnail" alt="Profile Picture"> {% endcomment %}
+            <ul class="list-styled">
+                <li class="d-grid"> <a href="{% url 'information' %}" class="btn"> Profile </a> </li>
+            </ul>    
+        </div>
+        <div class="">
+            {% if info %}
+            <div class="">
+                {% for data in info %}
+                    <div class="">
+                        <div class="">
+                            <div class="">
+                                <p class=" ">FULL NAME : {{data.full_name |upper}} </p>
+                                <p class=" ">CITY : {{data.get_city_display|upper}} </p>
+                                <p class=" ">PHONE : {{data..phone|upper}} </p>
+                                <p class=" ">EMAIL : {{data.email}} </p>
+                                <p class=" ">ADDRESS : {{data.address|upper}} </p>
+                                <p class=" ">DATE CREATED : {{data.date_created}} </p>
+                                <p class=" ">DATE UPDATED :
+                                    {{data.date_updated}} </p>
+                                    <br>
+                                <div class="">
+                                    <div class="">
+                                        <small> <a href="{% url 'update_profile' data.pk %}" class="btn btn-success"> Update </a></small>
+                                    </div>
+                                    <div class="col-auto">
+                                        <small class="text-end">  <a href="{% url 'passwordchange' %}" class="btn btn-success"> change  Password </a></small>
+                                    </div>
+                                </div>
+                        
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+                {% else %}
+                <div class="row justify-content-between">
+                    <div class="col-auto">
+                        <h5> No Profile Information Found </h5>
+                        <small> <a href="{% url 'create_profile' %}" class="btn btn-success"> Create </a></small>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock main-content %}
