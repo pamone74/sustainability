@@ -105,8 +105,8 @@ def Information(request):
     return render(request, "information.html", locals())
 
 # This is a dummy view function just as a placeholder for the dashboard urls
-def Dummy(request):
-    return render(request, "dummy.html")
+def create_product(request):
+    return render(request, "create_product.html")
 
 def Analytics(request):
     return render(request, "dashboard.html")

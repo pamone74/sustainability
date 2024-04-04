@@ -17,6 +17,7 @@ urlpatterns = [
     path("update/<int:pk>/", views.update, name="update_data"), 
     path("add_event", views.add_event, name="add_event"),
     path("recycle", views.recycle, name="recycle"),
+    
 
     # Authentication urls
     path("register", views.Registration.as_view(), name="register"),
@@ -29,9 +30,8 @@ urlpatterns = [
     path("create_profile/",views.Profileview.as_view(), name="create_profile"),
     
     #Dashboard urls
-    path("recycables/", views.Dummy, name="recycables"),
+    path("create_product/", views.create_product, name="create_product"),
     path("analytics/", views.Analytics, name="analytics"),
-    path("carbon/", views.Dummy, name="carbon"),
     path("information/", views.Information, name="information"),
     path("dashboard", views.dashboard, name="dashboard"),
 
