@@ -34,6 +34,7 @@ urlpatterns = [
     path("analytics/", views.Analytics, name="analytics"),
     path("information/", views.Information, name="information"),
     path("dashboard", views.dashboard, name="dashboard"),
+    path("recycle", views.recycle, name="recycle"),
 
 
 # Password Reset

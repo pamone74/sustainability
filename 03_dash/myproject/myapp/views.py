@@ -108,6 +108,9 @@ def Information(request):
 def create_product(request):
     return render(request, "create_product.html")
 
+def recycle(request):
+    return render(request, "recycle.html")
+
 def Analytics(request):
     return render(request, "dashboard.html")
 # Allan's view functions
