@@ -1,11 +1,12 @@
 {% extends "base.html" %}
 {% load static %}
+
 {% block title %}Recycle{% endblock title %}
 {% block main-content %}
 
 <style>
     .crd {
-        padding: 20px;
+        padding: 25px;
         height: auto;
         overflow: hidden;
     }
@@ -15,14 +16,17 @@
     }
     .card img {
         border-radius: 10px 10px 0 0;
-        height: 50%;
-        width: 50%;
+        height: 200px;
+        width: 100%;
     }
     body{
         background-color: #f8f9fa;
         background-image: linear-gradient(to bottom right,  #b7e4c7, #ffffff);
         background-repeat: no-repeat;
         background-size: contain;
+    }
+    pos5{
+        text-align: center;
     }
 </style>
 
@@ -31,7 +35,7 @@
 <div class="">
     <div class="">
         <div class="">
-            <h2 class="text-start text-success display-5 ">Recycle</h2>
+            <h4 style="text-align: center">Recycle</h4>
             <h5 class="text-start lead">Transforming your waste products into new items not only prevents them from contaminating the environment but also contributes to environmental conservation.</h5>
             <p> Recycle to Earns Reward points </p>
         </div>
@@ -41,9 +45,9 @@
 
 <div class="">
     <hr>
-    <div class = "">
-        <div class="">
-            <div class="">
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="card shadow">
                 <img src="{% static 'image/smart-bin.png' %}" class="card-img-top" alt="..." >
                 <div class="card-body crd">
                     <h5 class="text-start"> Recycle</h5>
@@ -53,10 +57,10 @@
             </div>
         </div>
 
-        <div class="">
-            <div class="">
+        <div class="col-sm-4">
+            <div class="card shadow">
                 <img src="{% static 'image/reuse.jpeg' %}" class="card-img-top" alt="...">
-                <div class="card-body">
+                <div class="card-body crd">
                     <h5 class="text-start"> Reuse </h5>
                     <p> Do you have items you do not use anymore? Do not watse it, share with who needs it. Promotes sustainability by sharing your items. </p>
                     <a href="{% url 'reuse' %}" class="btn btn-success">Reuse Products</a>
@@ -64,10 +68,10 @@
             </div>
         </div>
 
-        <div class="">
-            <div class="">
+        <div class="col-sm-4">
+            <div class="card shadow">
                 <img src="{% static 'image/innovate.jpeg' %}" class="card-img-top" alt="...">
-                <div class="card-body">
+                <div class="card-body crd">
                     <h5 class="text-start"> Innovate</h5>
 
                     <p>Turn waste into innovation. Each item is an opportunity for positive change as we lead in waste transformation." </p>

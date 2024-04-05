@@ -274,7 +274,7 @@
 							<span class="nav-text">Cart</span>
 						</a>
 					</li>
-					<li><a href="{% url 'analytics' %}">
+					<li><a href="{% url 'reuse' %}">
 							<i class="flaticon-bar-chart-1"></i>
 							<span class="nav-text">Reuse</span>
 						</a>
@@ -284,9 +284,9 @@
 						<span class="nav-text">Create Product</span>
 					</a>
 					</li>
-					<li><a href="{% url 'information' %}">
+					<li><a href="{% url 'reduce' %}">
 							<i class="flaticon-admin"></i>
-							<span class="nav-text">Order</span>
+							<span class="nav-text">Reduce</span>
 						</a>
 					</li>
 					<li><a href="{% url 'recycle' %}">
@@ -294,12 +294,12 @@
 							<span class="nav-text">Recycle</span>
 						</a>
 					</li>
-					<li><a href="{% url 'dashboard' %}">
+					<li><a href="{% url 'recover' %}">
 							<i class="flaticon-table"></i>
 							<span class="nav-text">Recover</span>
 						</a>
 					</li>
-					<li><a href="{% url 'dashboard' %}">
+					<li><a href="{% url 'form' %}">
 							<i class="flaticon-newsletter"></i>
 							<span class="nav-text">Form</span>
 						</a>
@@ -546,7 +546,7 @@
 									<div class="card-body">
 										<div class="text-center">
 											<div class="profile-photo">
-												<img src="{% static 'img/man.png' %}" width="10"
+												<img src="{% static 'img/man.png' %}" width="100"
 													class="img-fluid rounded-circle" alt="">
 											</div>
 											<h3 class="mt-4 mb-1">{{user.username |capfirst}}</h3>

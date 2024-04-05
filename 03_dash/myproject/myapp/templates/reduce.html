@@ -1,0 +1,160 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Reduce{% endblock title %}
+
+{% block main-content %}
+<style>
+    .card {
+        border-radius: 10px;
+        margin-bottom: 20px;
+    }
+
+    .card img {
+        border-radius: 10px 10px 0 0;
+        height: auto;
+    }
+    .crd {
+        padding: 25px;
+        height: auto;
+        overflow: hidden;
+    }
+    .card h5 {
+        text-align: center;
+    }
+    body{
+        background-color: #f8f9fa;
+        background-image: linear-gradient(to bottom right,  #b7e4c7, #ffffff);
+        background-repeat: no-repeat;
+        background-size: contain;
+
+    }
+    .badge2{
+        background-color: green;
+        height: auto;
+        width: 50%;
+        {% comment %} border-radius: 50%; {% endcomment %}
+        top: 0;
+        left: -1;
+        writing-mode: vertical-rl; 
+    }
+</style>
+{% comment %} <div class="badge2"> {% endcomment %}
+    {% comment %} <h1>Reduce</h1> {% endcomment %}
+{% comment %} </div> {% endcomment %}
+<div class="">
+    <div class="">
+        <div class="">
+            <h2  style="text-align: center"">Reduce</h2>
+            <h5 class="text-start lead">Empowering Change: Reduce, Reuse, and Rethink for a Greener Future</h5>
+            <p> Reduce to Earns Reward points </p>
+            <!--<p> Reducing climate change requires a combination of individual actions, policy changes, technological advancements, and global cooperation. Here are some key steps that can be taken:</p>-->
+        </div>
+    </div>
+</div>
+<div class="">
+    <hr>
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="card shadow h-20">
+                <img src="{% static 'image/taxi.jpeg' %}" class="card-img-top" alt="..." >
+                <div class="card-body crd">
+                    <h5 class="text-start"> Taxi Sharing | Trip sharing</h5>
+                    <p>Reduce your carbon footprint by sharing a taxi with others. </p>
+                    <a href="#" class="btn btn-success">Share Trips now</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="card shadow">
+                <img src="{% static 'image/download.jpeg' %}" class="card-img-top" alt="...">
+                <div class="card-body crd">
+                    <h5 class="text-start"> Use Public Transport </h5>
+                    <p>Reduce your carbon footprint by using public transport. </p>
+                    <a href="#" class="btn btn-success">Bus schedules</a>  
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card shadow">
+                <img src="{% static 'image/solar.jpeg' %}" class="card-img-top" alt="...">
+                <div class="card-body crd">
+                    <h5 class="text-start"> Use Renewable Energy</h5>
+
+                    <p>Reduce your carbon footprint by using renewable energy. </p>
+                    <a href="#" class="btn btn-success">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!--This is the second row-->
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="card shadow h-20">
+                <img src="{% static 'image/R.jpeg' %}" class="card-img-top" alt="..." >
+                <div class="card-body crd">
+                    <h5 class="text-start"> Protect and Restore Ecosystems </h5>
+                    <p> Forests, wetlands, and other ecosystems play a crucial role in sequestering carbon dioxide from the atmosphere. </p>
+                    <a href="#" class="btn btn-success">Drone for watse </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card shadow">
+                <img src="{% static 'image/home.jpeg' %}" class="card-img-top" alt="...">
+                <div class="card-body crd">
+                    <h5 class="text-start"> Energy Efficiency </h5>
+                    <p> Improving energy efficiency in buildings, appliances, and industrial processes can reduce energy consumption and lower emissions.</p>
+                    <a href="#" class="btn btn-success">Use smart Home</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card shadow">
+                <img src="{% static 'image/educate.jpeg' %}" class="card-img-top" alt="...">
+                <div class="card-body crd">
+                    <h5 class="text-start"> Educate and Raise Awareness </h5>
+                    <p> Educating yourself and others about climate change and the actions that can be taken to reduce emissions is an important step.</p>
+                    <a href="#" class="btn btn-success">Educate Now</a>
+                </div>
+            </div>
+        </div>
+<!--This is the third row-->
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="card shadow h-20">
+                    <img src="{% static 'image/consump.jpeg' %}" class="card-img-top" alt="..." >
+                    <div class="card-body crd">
+                        <h5 class="text-start"> Reduce Consumption and Waste</h5>
+                        <p> Reducing consumption, reusing products, and recycling materials can lower emissions associated with production and disposal </p>
+                        <a href="#" class="btn btn-success">Learn More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card shadow">
+                    <img src="{% static 'image/no.jpeg' %}" class="card-img-top" alt="...">
+                    <div class="card-body crd">
+                        <h5 class="text-start"> Support Climate Policies </h5>
+                        <p> Individuals can advocate for and support policies at the local, national, and international levels  to reduce greenhouse gas emissions.</p>
+                        <a href="#" class="btn btn-success">Learn More</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="card shadow">
+                    <img src="{% static 'image/reuse.jpeg' %}" class="card-img-top" alt="...">
+                    <div class="card-body crd">
+                        <h5 class="text-start"> Reuse </h5>
+                        <p> Do you have items you do not use anymore? Do not watse it, share with who needs it. Promotes sustainability by sharing your items. </p>
+                        <a href="#" class="btn btn-success">Reuse Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
+{% endblock main-content %}

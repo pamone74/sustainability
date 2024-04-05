@@ -40,82 +40,81 @@
 }
 </style>
 <div class="">
-    <div class="">
-        <h4>Reward Points: </h4>
-        <h4 class="count num-text text-black font-w400">100</h4>
-    </div>
-    <br>
-    <hr class="border border-danger border-3 opacity-50">
-    <div class="row">
-        <div class="col-sm-2 border-end" >
-            {% comment %} <img src="{% static 'app/images/profile.jpg' %}" class="img-thumbnail" alt="Profile Picture"> {% endcomment %}   
-        </div>
-        <div class="">
-            {% if info %}
-            <div class="">
-                {% for data in info %}
-                    <div class="">
-                        <div class="">
-                            <div class="">
+  <h4>Reward Points: </h4>
+  <h4 class="count num-text text-black font-w400">100</h4>
+</div>
+<br>
+<hr class="border border-danger border-3 opacity-50">
+<div class="row">
+  <div class="col-sm-2 border-end" >
+      {% comment %} <img src="{% static 'app/images/profile.jpg' %}" class="img-thumbnail" alt="Profile Picture"> {% endcomment %}   
+  </div>
+  <div class="">
+      {% if info %}
+      <div class="">
+          {% for data in info %}
+              <div class="">
+                  <div class="">
+                      <div class="">
 
-                                <table id="custom">
-                                    <tr>
-                                      <th>Profile</th>
-                                      <th>Details</th>       
-                                    </tr>
-                                    <tr>
-                                      <td>FULL NAME</td>
-                                      <td>{{data.full_name |upper}}</td>
-                                    </tr>
-                                    <tr>
-                                      <td>City</td>
-                                      <td>{{data.get_city_display|upper}}</td>
-                                    </tr>
-                                    <tr>
-                                      <td>Country</td>
-                                      <td>{{data.get_country_origin_display|upper}}</td>
-                                    </tr>
-                                    <tr>
-                                      <td>Phone</td>
-                                      <td>{{data.phone|upper}}</td>
-                                    </tr>
-                                    <tr>
-                                      <td>Email Address</td>
-                                      <td>{{data.email}}</td>
-                                    </tr>
-                                    <tr>
-                                      <td>Date Created</td>
-                                      <td>{{data.date_created}}</td>
-                                    </tr>
-                                    <tr>
-                                      <td>Date Updated</td>
-                                      <td>{{data.date_updated}}</td>
-                                    </tr>
-                                  </table>
-                                  <br>
-                                <div class="">
-                                    <span class="right_side">
-                                        <small> <a href="{% url 'update_profile' data.pk %}" class="btn btn-success"> Update </a></small>
-                                    </span>
-                                    <span class="left_side">
-                                        <small class="text-end">  <a href="{% url 'passwordchange' %}" class="btn btn-danger"> change  Password </a></small>
-                                    </span>
-                                </div>
-                        
-                            </div>
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
-                {% else %}
-                <div class="row justify-content-between">
-                    <div class="col-auto">
-                        <h5> No Profile Information Found </h5>
-                        <small> <a href="{% url 'create_profile' %}" class="btn btn-success"> Create </a></small>
-                    </div>
-                </div>
-            {% endif %}
-        </div>
-    </div>
+                          <table id="custom">
+                              <tr>
+                                <th>Profile</th>
+                                <th>Details</th>       
+                              </tr>
+                              <tr>
+                                <td>FULL NAME</td>
+                                <td>{{data.full_name |upper}}</td>
+                              </tr>
+                              <tr>
+                                <td>City</td>
+                                <td>{{data.get_city_display|upper}}</td>
+                              </tr>
+                              <tr>
+                                <td>Country</td>
+                                <td>{{data.get_country_origin_display|upper}}</td>
+                              </tr>
+                              <tr>
+                                <td>Phone</td>
+                                <td>{{data.phone|upper}}</td>
+                              </tr>
+                              <tr>
+                                <td>Email Address</td>
+                                <td>{{data.email}}</td>
+                              </tr>
+                              <tr>
+                                <td>Date Created</td>
+                                <td>{{data.date_created}}</td>
+                              </tr>
+                              <tr>
+                                <td>Date Updated</td>
+                                <td>{{data.date_updated}}</td>
+                              </tr>
+                            </table>
+                            <br>
+                          <div class="">
+                              <span class="right_side">
+                                  <small> <a href="{% url 'update_profile' data.pk %}" class="btn btn-success"> Update </a></small>
+                              </span>
+                              <span class="left_side">
+                                  <small class="text-end">  <a href="{% url 'passwordchange' %}" class="btn btn-danger"> change  Password </a></small>
+                              </span>
+                          </div>
+                  
+                      </div>
+                  </div>
+              </div>
+          {% endfor %}
+      </div>
+          {% else %}
+          <div class="row justify-content-between">
+              <div class="col-auto">
+                  <h5> No Profile Information Found </h5>
+                  <small> <a href="{% url 'create_profile' %}" class="btn btn-success"> Create </a></small>
+              </div>
+          </div>
+      {% endif %}
+  </div>
+</div>
 </div>
 {% endblock main-content %}

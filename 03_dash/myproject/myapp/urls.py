@@ -13,11 +13,11 @@ urlpatterns = [
     path("add_product/", views.add_product, name="add_product"),
     path("reuse/", views.reuse, name="reuse"),
     path("detail/<int:pk>/", views.get_detail, name="detail"), 
-    path("search", views.search_result, name="search_result"),
+    path("search/", views.search_result, name="search_result"),
     path("update/<int:pk>/", views.update, name="update_data"), 
-    path("add_event", views.add_event, name="add_event"),
-    path("recycle", views.recycle, name="recycle"),
-    
+    path("add_event/", views.add_event, name="add_event"),
+    path("recycle/", views.recycle, name="recycle"),
+    path("form/", views.form, name="form"),
 
     # Authentication urls
     path("register", views.Registration.as_view(), name="register"),
@@ -31,11 +31,32 @@ urlpatterns = [
     
     #Dashboard urls
     path("create_product/", views.create_product, name="create_product"),
-    path("analytics/", views.Analytics, name="analytics"),
+    #path("analytics/", views.Analytics, name="analytics"),
     path("information/", views.Information, name="information"),
-    path("dashboard", views.dashboard, name="dashboard"),
-    path("recycle", views.recycle, name="recycle"),
+    path("dashboard/", views.dashboard, name="dashboard"),
+    path("recycle/", views.recycle, name="recycle"),
+    path("reuse/", views.reuse, name="reuse"),
+    path("reduce/", views.reduce, name="reduce"),
+    path("recover/", views.recover, name="recover"),
+    path("add_reuse_product", views.add_reuse_product, name="add_reuse_product"),
+    path("my_products", views.my_products, name="my_products"),
+    path("create/", views.CreateProduct.as_view(), name="create"),
+    path("transfer/", views.TransferProduct.as_view(), name="transfer"),
+    path("create-tranfer/", views.create_tranfer, name="create-tranfer"),
 
+    # Products and users
+    path("add-reuse-product/", views.AddResueProduct.as_view(), name="add_reuse_product"),
+    path("add-to-cart", views.add_product_to_cart, name="add_to_cart"),
+    path("detail/<int:pk>/", views.PoductDetail, name="details"), 
+    path("cart/", views.show_cart, name="cart"),
+    path("reuse/", views.reuse, name="reuse"),
+    path("pluscart/", views.plus_cart),
+    path("minuscart/", views.minus_cart),
+    path("removecart", views.remove_cart, name='removecart'),
+    path("checkout/", views.Checkout.as_view(), name="checkout"),
+    path("my-products/", views.display_my_product, name="my_products"),
+    path("update-my-products/<int:pk>", views.MyProducts.as_view(), name="update_my_products"),
+    path("delete-my-products/<int:pk>", views.DeleteMyProducts.as_view(), name="delete_my_products"),
 
 # Password Reset
     path("password-change/", auth_views.PasswordChangeView.as_view(template_name="passwordchange.html", form_class=PasswordChangeForm, success_url='/passwordchangedone/'),

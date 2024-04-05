@@ -8280,11 +8280,11 @@ a {
   white-space: nowrap; }
 
 .content-body .container {
-  margin-top: 10px; 
+  margin-top: 5px; 
 }
 
 .content-body .container-fluid, .content-body .container-sm, .content-body .container-md, .content-body .container-lg, .content-body .container-xl, .content-body .container-xxl {
-  padding-top: 10px;
+  padding-top: 5px;
   padding-right: 40px;
   padding-left: 40px; 
   margin: 0;
@@ -8293,8 +8293,8 @@ a {
     .content-body .container-fluid, .content-body .container-sm, .content-body .container-md, .content-body .container-lg, .content-body .container-xl, .content-body .container-xxl {
       padding-top: 30px;
       height: auto;
-      margin-left: 15%;
-      margin-right: 10%;
+      margin-left: 6%;
+      margin-right: 2%;
       margin-bottom: 0;
     
     } }
@@ -9147,8 +9147,8 @@ a {
         padding-right: 0.938rem; } }
   .header .navbar {
     padding: 0;
-    height: 100%;
-    width: 100%; }
+    height: 50%;
+    width: 50%; }
     .header .navbar .navbar-collapse {
       height: 100%;
       width: 100%; }
