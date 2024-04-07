@@ -7,6 +7,7 @@
     .card {
         border-radius: 10px;
         margin-bottom: 20px;
+        transition: transform 0.3s, box-shadow 0.3s;
     }
 
     .card img {
@@ -26,37 +27,31 @@
         background-image: linear-gradient(to bottom right,  #b7e4c7, #ffffff);
         background-repeat: no-repeat;
         background-size: contain;
-
     }
-    .badge{
-        background-color: green;
-        height: 100vh;
-        width: 50px;
-        {% comment %} border-radius: 50%; {% endcomment %}
-        position: absolute;
-        top: 0;
-        left: -1;
-        writing-mode: vertical-rl; 
+    .card:hover {
+        transform: scale(1.1);
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+    .card-body {
+        padding: 20px;
     }
 </style>
-{% comment %} <div class="badge"> {% endcomment %}
-    {% comment %} <h1>Reduce</h1> {% endcomment %}
-{% comment %} </div> {% endcomment %}
+
 <div class="container-sm my-4">
     <div class="row">
         <div class="col-sm-12 p-4">
             <h2 class="text-start text-success display-5">Recover</h2>
             <h5 class="text-start lead">Recover emphasizes the extraction of value from waste that cannot be directly reused or recycled. This process involves various methods aimed at diverting waste from landfills and harnessing its potential for further use or energy generation.</h5>
             <p> Recover to Earns Reward points </p>
-            <!--<p> Reducing climate change requires a combination of individual actions, policy changes, technological advancements, and global cooperation. Here are some key steps that can be taken:</p>-->
         </div>
     </div>
 </div>
+
 <div class="container">
     <hr>
     <div class="row">
-        <div class="col-sm-4">
-            <div class="card shadow h-20">
+        <div class="col-md-3">
+            <div class="card">
                 <img src="{% static 'image/compost-waste.jpeg' %}" class="card-img-top" alt="..." >
                 <div class="card-body crd">
                     <h5 class="text-start"> Waste Composting </h5>
@@ -66,8 +61,8 @@
             </div>
         </div>
 
-        <div class="col-sm-4">
-            <div class="card shadow">
+        <div class="col-md-3">
+            <div class="card">
                 <img src="{% static 'image/pyrolysis.jpeg' %}" class="card-img-top" alt="..." >
                 <div class="card-body crd">
                     <h5 class="text-start"> Waste-to-Energy </h5>
@@ -77,8 +72,8 @@
             </div>
         </div>
 
-        <div class="col-sm-4">
-            <div class="card shadow h-20">
+        <div class="col-md-3">
+            <div class="card">
                 <img src="{% static 'image/biological.jpeg' %}" class="card-img-top" alt="..." >
                 <div class="card-body crd">
                     <h5 class="text-start"> Biological Recovery </h5>
@@ -88,12 +83,8 @@
             </div>
         </div>
 
-    </div>
-
-<!--This is the second row-->
-    <div class="row">
-        <div class="col-sm-4">
-            <div class="card shadow">
+        <div class="col-md-3">
+            <div class="card">
                 <img src="{% static 'image/recycle-recover.jpeg' %}" class="card-img-top" alt="...">
                 <div class="card-body crd">
                     <h5 class="text-start"> Search | Find | Recycle </h5>
@@ -102,8 +93,12 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-4">
-            <div class="card shadow">
+    </div>
+
+    <!--This is the second row-->
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card">
                 <img src="{% static 'image/educate-reovery.jpeg' %}" class="card-img-top" alt="...">
                 <div class="card-body crd">
                     <h5 class="text-start"> Educate  </h5>
@@ -113,51 +108,16 @@
             </div>
             
         </div>
-        <div class="col-sm-4">
-            <div class="card shadow">
+        <div class="col-md-3">
+            <div class="card">
                 <img src="{% static 'image/reuse.jpeg' %}" class="card-img-top" alt="...">
                 <div class="card-body crd">
                     <h5 class="text-start"> Reuse </h5>
-                    <p> Do you have items you do not use anymore? Do not watse it, share with who needs it. Promotes sustainability by sharing your items. </p>
+                    <p> Do you have items you do not use anymore? Do not waste it, share with who needs it. Promotes sustainability by sharing your items. </p>
                     <a href="#" class="btn btn-success">Reuse Now</a>
                 </div>
             </div>
         </div>
-<!--This is the third row
-        <div class="row">
-            <div class="col-sm-4">
-                <div class="card shadow h-20">
-                    <img src="{% static 'image/consump.jpeg' %}" class="card-img-top" alt="..." >
-                    <div class="card-body crd">
-                        <h5 class="text-start"> Reduce Consumption and Waste</h5>
-                        <p> Reducing consumption, reusing products, and recycling materials can lower emissions associated with production and disposal </p>
-                        <a href="#" class="btn btn-success">Learn More</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="card shadow">
-                    <img src="{% static 'image/no.jpeg' %}" class="card-img-top" alt="...">
-                    <div class="card-body crd">
-                        <h5 class="text-start"> Support Climate Policies </h5>
-                        <p> Individuals can advocate for and support policies at the local, national, and international levels  to reduce greenhouse gas emissions.</p>
-                        <a href="#" class="btn btn-success">Learn More</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-sm-4">
-                <div class="card shadow">
-                    <img src="{% static 'image/reuse.jpeg' %}" class="card-img-top" alt="...">
-                    <div class="card-body crd">
-                        <h5 class="text-start"> Reuse </h5>
-                        <p> Do you have items you do not use anymore? Do not watse it, share with who needs it. Promotes sustainability by sharing your items. </p>
-                        <a href="#" class="btn btn-success">Reuse Now</a>
-                    </div>
-                </div>
-            </div>
-        </div>-->
-        
     </div>
 </div>
 {% endblock main-content %}

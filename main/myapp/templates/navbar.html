@@ -1,12 +1,62 @@
 {% load static %}
 {% block content %}
+<style>
+    /* Custom CSS for navbar */
+    .navbar {
+        background-color: #fff; /* Navbar background color */
+    }
+
+    .navbar-toggler {
+        border: none; /* Remove border from toggler */
+    }
+
+    .navbar-toggler:focus {
+        outline: none; /* Remove focus outline */
+    }
+
+    .navbar-nav {
+        margin-left: auto; /* Align items to the right */
+    }
+
+    .nav-item {
+        margin-left: 10px; /* Add space between nav items */
+    }
+
+    .nav-link {
+        color: #333; /* Nav link color */
+    }
+
+    .nav-link:hover {
+        color: #555; /* Nav link hover color */
+    }
+
+    .active .nav-link {
+        color: green; /* Active nav link color */
+    }
+
+    /* Responsive styles */
+    @media (max-width: 768px) {
+        .navbar-nav {
+            margin-left: 0; /* Remove margin on small screens */
+            flex-direction: column; /* Stack nav items vertically */
+        }
+
+        .nav-item {
+            margin-left: 0; /* Remove margin on small screens */
+        }
+
+        .nav-link {
+            padding: 10px; /* Add padding to nav links */
+        }
+    }
+</style>
+
 <header class="header_area shadow bg-light">
-    <div class="container ">
+    <div class="container">
         <nav class="navbar navbar-expand-lg navbar-light">
             <!-- Brand and toggle get grouped for better mobile display -->
             {% if request.user.is_authenticated %}
             <h4 class="nav-item text-start" style="margin-left:0"><a class="nav-link"  href="{% url 'profile'%}">{{request.user|capfirst}}</a></h4>
-            
             {% endif %}
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="icon-bar"></span>
@@ -17,23 +67,35 @@
             <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
                 <ul class="nav navbar-nav menu_nav ml-auto">
                     {% if request.user.is_authenticated %}
-                    <li class="nav-item"><a class="nav-link"  href="{% url "reuse"%}">Reuse</a></li>
-                    <li class="nav-item"><a class="nav-link"  href="{% url "recycle"%}">Recycle</a></li>
-                    <li class="nav-item"><a class="nav-link"  href="{% url "reduce"%}">Reduce</a></li>
+                    <li class="nav-item"><a class="nav-link"  href="{% url 'reuse' %}">Reuse</a></li>
+                    <li class="nav-item"><a class="nav-link"  href="{% url 'recycle' %}">Recycle</a></li>
+                    <li class="nav-item"><a class="nav-link"  href="{% url 'reduce' %}">Reduce</a></li>
                     <li class="nav-item"><a class="nav-link"  href="{% url 'recover'%}">Recover</a></li>
                     <li class="nav-item"><a class="nav-link"  href="{% url 'profile'%}">Dashboard</a></li>
                     <li class="nav-item"><a class="nav-link"  href="{% url 'create-tranfer'%}">Create Product</a></li>
                     <li class="nav-item"> <a class="nav-link" ><form action="{% url 'logout' %} " method="post" >
                         {% csrf_token %}
-                        <button type="buton" class="btn " data-bs-toggle="button">LOGOUT </button> </form></a></li>
+                        <button type="button" class="btn " data-bs-toggle="button">LOGOUT </button> </form></a></li>
                     {% else%}
                     
-                    <li class="nav-item active"><a class="nav-link" href="{% url 'index' %}">Home</a></a></li> 
-                    <li class="nav-item"><a class="nav-link"  href="#about">About us</a></li>
-                    <li class="nav-item"><a class="nav-link"  href="#projects">Projects</a></li>
-                    <li class="nav-item"><a class="nav-link"  href="#themes">themes</a></li>
-                    <li class="nav-item"><a class="nav-link"  href="#contact">Contact</a></li>
-                    <li class="nav-item"><a class="nav-link"  href="{% url 'login' %}">LOGIN </a></li>
+                    <li class="nav-item {% if request.path == '/' %}active{% endif %}">
+                        <a class="nav-link" href="{% url 'index' %}">Home</a>
+                    </li> 
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#projects">Projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#themes">Themes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">LOGIN</a>
+                    </li>
                     {% endif %}
                 </ul>
             </div> 
