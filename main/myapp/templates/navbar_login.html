@@ -1,0 +1,40 @@
+{% load static %}
+{% block content %}
+<header class="header_area shadow bg-light">
+    <div class="container ">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            {% if request.user.is_authenticated %}
+            <h4 class="nav-item text-start" style="margin-left:0"><a class="nav-link"  href="{% url 'profile'%}">{{request.user|capfirst}}</a></h4>
+            
+            {% endif %}
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+                <ul class="nav navbar-nav menu_nav ml-auto">
+                    {% if request.user.is_authenticated %}
+                    <li class="nav-item"><a class="nav-link"  href="{% url 'reuse' %}">Reuse</a></li>
+                    <li class="nav-item"><a class="nav-link"  href="{% url 'recycle' %}">Recycle</a></li>
+                    <li class="nav-item"><a class="nav-link"  href="{% url 'reduce' %}">Reduce</a></li>
+                    <li class="nav-item"><a class="nav-link"  href="{% url 'recover'%}">Recover</a></li>
+                    <li class="nav-item"><a class="nav-link"  href="{% url 'profile'%}">Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link"  href="{% url 'create-tranfer'%}">Create Product</a></li>
+                    <li class="nav-item"> <a class="nav-link" ><form action="{% url 'logout' %} " method="post" >
+                        {% csrf_token %}
+                        <button type="buton" class="btn " data-bs-toggle="button">LOGOUT </button> </form></a></li>
+                    {% else%}
+                    
+                    <li class="nav-item active"><a class="nav-link" href="{% url 'index' %}">Home</a></a></li> 
+                    <li class="nav-item"><a class="nav-link"  href="{% url 'contact' %}">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link"  href="{% url 'login' %}">LOGIN </a></li>
+                    {% endif %}
+                </ul>
+            </div> 
+        </nav>
+    </div>
+</header>
+{% endblock %}

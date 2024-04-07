@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Information{% endblock title %}
+
+{% block main-content %}
+<style>
+    .left_side {
+        text-align: center;
+        float: left;
+        padding: 10px;
+        margin-left: 0;
+    }
+    .right_side {
+        text-align: center;
+        float: right;
+        margin-right: 0;
+    }
+
+    #custom {
+        font-family: Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    #custom td, #custom th {
+        border: 1px solid #ddd;
+        padding: 8px;
+    }
+
+    #custom tr:nth-child(even){background-color: #f2f2f2;}
+
+    #custom tr:hover {background-color: #ddd;}
+
+    #custom th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: #04AA6D;
+        color: white;
+    }
+</style>
+<div class="">
+  <h4>Reward Points: </h4>
+  <h4 class="count num-text text-black font-w400">100</h4>
+</div>
+<br>
+<hr class="border border-danger border-3 opacity-50">
+<div class="row">
+  <div class="col-sm-2 border-end" >
+      {% comment %} <img src="{% static 'app/images/profile.jpg' %}" class="img-thumbnail" alt="Profile Picture"> {% endcomment %}   
+  </div>
+  <div class="">
+      {% if info %}
+      <div class="">
+          {% for data in info %}
+              <div class="">
+                  <div class="">
+                      <div class="">
+
+                          <table id="custom">
+                              <tr>
+                                <th>Profile</th>
+                                <th>Details</th>       
+                              </tr>
+                              <tr>
+                                <td>FULL NAME</td>
+                                <td>{{data.full_name |upper}}</td>
+                              </tr>
+                              <tr>
+                                <td>City</td>
+                                <td>{{data.get_city_display|upper}}</td>
+                              </tr>
+                              <tr>
+                                <td>Country</td>
+                                <td>{{data.get_country_origin_display|upper}}</td>
+                              </tr>
+                              <tr>
+                                <td>Phone</td>
+                                <td>{{data.phone|upper}}</td>
+                              </tr>
+                              <tr>
+                                <td>Email Address</td>
+                                <td>{{data.email}}</td>
+                              </tr>
+                              <tr>
+                                <td>Date Created</td>
+                                <td>{{data.date_created}}</td>
+                              </tr>
+                              <tr>
+                                <td>Date Updated</td>
+                                <td>{{data.date_updated}}</td>
+                              </tr>
+                              <tr>
+                                <td>User Type</td>
+                                <td>{{data.user_type}}</td>
+                              </tr>
+                            </table>
+                            <br>
+                          <div class="">
+                              <span class="right_side">
+                                  <small> <a href="{% url 'update_profile' data.pk %}" class="btn btn-success"> Update </a></small>
+                              </span>
+                              <span class="left_side">
+                                  <small class="text-end">  <a href="{% url 'passwordchange' %}" class="btn btn-danger"> change  Password </a></small>
+                              </span>
+                          </div>
+                  
+                      </div>
+                  </div>
+              </div>
+          {% endfor %}
+      </div>
+          {% else %}
+          <div class="row justify-content-between">
+              <div class="col-auto">
+                  <h5> No Profile Information Found </h5>
+                  <small> <a href="{% url 'create_profile' %}" class="btn btn-success"> Create </a></small>
+              </div>
+          </div>
+      {% endif %}
+  </div>
+</div>
+</div>
+{% endblock main-content %}

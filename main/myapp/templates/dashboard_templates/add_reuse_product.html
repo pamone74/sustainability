@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}
+Add Product
+{% endblock title %}
+
+{% block main-content %}
+<div class="">
+    <div class="">
+        <div class="">
+            <form method="post" action="" enctype="multipart/form-data" class="shadow p-5">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-sm-6">
+                        <button type="submit" class="btn btn-primary">Add Product</button>
+                    </div>
+                    <div class="col-sm-6 text-end">
+                        <a href="{% url 'reuse' %}" class="btn btn-danger ">Cancel</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock main-content %}
