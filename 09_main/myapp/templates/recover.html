@@ -1,0 +1,164 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Recover{% endblock title %}
+
+{% block extra_css %}
+<style>
+    .card {
+        border-radius: 20px; /* Increase border radius */
+        margin-bottom: 20px;
+        transition: transform 0.3s, box-shadow 0.3s;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        cursor: pointer;
+        border: 2px solid transparent; /* Add border with transparent color */
+    }
+
+    .card img {
+        border-radius: 20px 20px 0 0; /* Match border radius */
+        height: 200px;
+    }
+
+    .crd {
+        padding: 20px;
+        overflow: hidden;
+    }
+
+    .card h5 {
+        text-align: center;
+    }
+
+    body {
+        background-color: #f8f9fa;
+        background-image: linear-gradient(to bottom right, #b7e4c7, #ffffff);
+        background-repeat: no-repeat;
+        background-size: contain;
+    }
+
+    .card:hover {
+        transform: scale(1.1) rotate(2deg);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3), 0 12px 40px rgba(0, 0, 0, 0.3); /* Adjust shadow */
+        border-color: rgba(0, 0, 0, 0.3); /* Add border color */
+    }
+
+    @keyframes swing {
+        0% {
+            transform: rotate(2deg);
+        }
+        50% {
+            transform: rotate(-2deg);
+        }
+        100% {
+            transform: rotate(2deg);
+        }
+    }
+
+    .card:hover {
+        animation: swing 0.5s ease;
+    }
+
+    .card-body {
+        padding: 15px;
+        margin-top: auto; /* Align content to the bottom */
+    }
+</style>
+{% endblock extra_css %}
+
+{% block main-content %}
+<div class="container my-4">
+    <div class="row">
+        <div class="col-sm-12 p-4">
+            <h2 class="text-start text-success display-5 text-center">Recover</h2>
+            <h5 class="text-start lead">Recover emphasizes the extraction of value from waste that cannot be directly reused or recycled. This process involves various methods aimed at diverting waste from landfills and harnessing its potential for further use or energy generation.</h5>
+            <p>Recover to Earns Reward points</p>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <img src="{% static 'image/compost-waste.jpeg' %}" class="card-img-top" alt="...">
+                <div class="card-body crd">
+                    <h5 class="text-start">Waste Composting</h5>
+                    <p>Organic waste, such as food scraps and yard trimmings, can be composted to create nutrient-rich soil amendments</p>
+                    <div class="text-center">
+                        <a href="#" class="btn btn-success">Learn more</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card">
+                <img src="{% static 'image/pyrolysis.jpeg' %}" class="card-img-top" alt="...">
+                <div class="card-body crd">
+                    <h5 class="text-start">Waste-to-Energy</h5>
+                    <p>Non-recyclable and non-compostable items can be converted into energy through waste-to-energy technologies such as Pyrolysis and Gasification.</p>
+                    <div class="text-center">
+                        <a href="#" class="btn btn-success">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card">
+                <img src="{% static 'image/biological.jpeg' %}" class="card-img-top" alt="...">
+                <div class="card-body crd">
+                    <h5 class="text-start">Biological Recovery</h5>
+                    <p>Wastewater and organic matter can undergo biological treatment processes to produce biogas or biofuels. Anaerobic digestion can produce methane-rich biogas.</p>
+                    <div class="text-center">
+                        <a href="#" class="btn btn-success">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Second Row -->
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <img src="{% static 'image/recycle-recover.jpeg' %}" class="card-img-top" alt="...">
+                <div class="card-body crd">
+                    <h5 class="text-start">Search | Find | Recycle</h5>
+                    <p>Search for recyclables, earn prizes, and collect reward points for your eco-friendly efforts. Join us today.</p>
+                    <div class="text-center">
+                        <a href="#" class="btn btn-success">Join Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card">
+                <img src="{% static 'image/educate-reovery.jpeg' %}" class="card-img-top" alt="...">
+                <div class="card-body crd">
+                    <h5 class="text-start">Educate</h5>
+                    <p>Educating on recovery and emission reduction is vital. Let's act for a sustainable future and a healthier planet. Join us!</p>
+                    <div class="text-center">
+                        <a href="#" class="btn btn-success">Educate Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card">
+                <img src="{% static 'image/reuse.jpeg' %}" class="card-img-top" alt="...">
+                <div class="card-body crd">
+                    <h5 class="text-start">Reuse</h5>
+                    <p>Do you have items you do not use anymore? Do not waste it, share it with those who need it. Promote sustainability by sharing your items.</p>
+                    <div class="text-center">
+                        <a href="#" class="btn btn-success">Reuse Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock main-content %}

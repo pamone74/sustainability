@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Details of the Product{% endblock title %}
+
+{% block extra_css %}
+<style>
+    .product-details {
+        margin-top: 50px;
+    }
+    .product-details img {
+        max-width: 100%;
+        height: auto;
+    }
+    .product-details .product-description {
+        margin-top: 20px;
+    }
+    .product-details .btn-container {
+        margin-top: 20px;
+    }
+</style>
+{% endblock extra_css %}
+
+{% block main-content %}
+<div class="container my-5 product-details">
+    <div class="row">
+        <div class="col-sm-2">
+            <img src="{{ product.product_image.url }}" class="img-fluid" alt="{{ product.name }}">
+        </div>
+        <div class="col-sm-8">
+            <h2>{{ product.product_name }}</h2>
+            <p class="product-description">{{ product.product_description }}</p>
+            <p>Category: {{ product.get_product_catagories_display }}</p>
+            <p>Address: {{ product.product_address }}</p>
+        </div>
+        <div class="col-sm-2 btn-container">
+            <form action="/add-to-cart" class="d-inline">
+                <input type="hidden" name="pro_id" value={{product.id}}/>
+                <button type="submit" class="btn btn-primary shadow px-5 py-2">Add to Cart</button>
+            </form>
+            <br>
+            <a href="{% url 'reuse' %}" class="btn btn-success px-5 py-2 mt-3">Order Now</a>
+        </div>
+    </div>
+</div>
+{% endblock main-content %}

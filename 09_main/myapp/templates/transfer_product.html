@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Add Product
+{% endblock title %}
+
+{% block main-content %}
+{% if transfer_product %}
+    <div class="container my-5">
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Success!</strong> Product transferred successfully.
+            <a href="{% url 'create' %}" class="text-end"> Add another product</a>
+        </div>
+    </div>
+{% else %}
+<div class="container">
+    {% if not not_allowed%}
+    <div class="row my-3">
+        <div class="col-md-6 offset-md-3">
+            <form method="post" action="" enctype="multipart/form-data" class="shadow p-5">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <div class="row pt-4">
+                    <div class="col-md-6">
+                        <button type="submit" class="btn btn-primary">Transfer</button>
+                    </div>
+                    <div class="col-md-6 text-md-end">
+                        <a href="{% url 'reuse' %}" class="btn btn-danger">Cancel</a>
+                    </div>
+                </div>
+                {% if messages %}
+                {% for msg in messages %}
+                <div class="row pt-5">
+                    <div class="col-md-12">
+                        <div class="alert alert-{{ msg.tags }}" role="alert">
+                            {{ msg }} 
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                {% endif %}
+            </form>
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+{% endif %}
+{% if no_product %}
+<div class="container my-5">
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Error!</strong> You are not allowed to add a product.
+        <p> If you want to add a product, please contact the admin or update your info <a href="{% url "update_profile" request.user.id %}" class="text-end"> here </a><p>
+    </div>
+</div>
+{% elif not_allowed %}
+    <div class="container my-5">
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Error!</strong> You are not allowed to add a product because you are a Consumer.
+            <p> If you want to add a product, please contact the admin or update your info <a href="{% url "create_profile" %}" class="text-end"> here </a><p>
+        </div>
+    </div>
+{% endif %}
+{% if denied %}
+    <div class="container my-5">
+        <p>Denied</p>
+    </div>
+{% endif %}
+{% endblock main-content %}

@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block title %}Search Result{% endblock title %}
+{% block main-content %}
+<style>
+    .search_bar {
+        width: 400px;
+        float: right;
+    }
+
+    @media screen and (max-width: 768px) {
+        .search_bar {
+            width: 100%;
+            margin-top: 20px;
+        }
+    }
+
+    /* Animate card hover */
+    .card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+        transform: scale(1.2) rotate(10deg); /* Increase size and rotate */
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Animation for card movement on hover */
+    .card:hover {
+        animation: moveLeftRight 0.5s ease infinite alternate;
+    }
+
+    @keyframes moveLeftRight {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(5px); /* Change this value to adjust the distance */
+        }
+    }
+
+    /* Center images within cards */
+    .card-img-top {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 100%;
+        height: auto;
+    }
+</style>
+<br>
+<div class="search_bar">
+    <form class="d-flex" method="POST" action="{% url 'search_result'%}">
+        {% csrf_token %}
+        <input class="form-control me-2 border border-success" type="search" placeholder="Search" aria-label="Search" name="searched">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
+</div>
+<br>
+<div class="">
+    <div class="">
+        <div class="">
+            {% if product %}
+            <h4 class ="text-center text-success"> Search Results for : {{ searched|capfirst }}</h4>
+            <div class="row">
+                {% for items in product %}
+                <div class="col-lg-2 col-md-4 col-sm-6">
+                    <div class="card">
+                        <a href="{% url 'details' items.id%}"><img src="{{ items.product_image.url }}" class="card-img-top" alt="..."></a>
+                        <div class="card-body">
+                            <a href="#" style="text-decoration:none;color:black;"><h5 class="card-title">{{ items.product_name }}</h5></a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        {% else %}
+        <br>
+        <div class="alert alert-danger text-center" role="alert">
+            <h4>No result found</h4>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock main-content%}

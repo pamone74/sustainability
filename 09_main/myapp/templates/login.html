@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Login{% endblock title %}
+
+{% block main-content %}
+<style>
+    #pos6{
+        margin-left: 2%;
+        margin-right: 2%;
+        border: 4px;
+        height: fit-content;
+    }
+
+    @media only screen and (min-width: 1024px ){
+        #pos6{
+            margin-left: 13.5%;
+            margin-right: 13.5%;
+            height: 100%;
+        }
+    }
+
+    @media only screen and (min-width: 720px ){
+        #pos6{
+            margin-left: 13.5%;
+            margin-right: 13.5%;
+            height: 100%;
+        }
+    }
+    
+
+</style>
+<div class="row my-3">
+    <div class="col-sm-6 offset-sm-3">
+        <h3 align="center">Login</h3>
+        <br>
+        <form method="post" id = "pos6" action="" novalidate class="shadow p-5">
+        {% csrf_token %}
+            {% for fm in form  %}
+                {{fm.label_tag}} {{fm}} <small class="text-danger">{{fm.errors|striptags}}</small>
+                <br>
+            {% endfor %}
+            <small><a href="{% url 'password_reset' %}">Forgot Password?</a></small>
+            <br>
+            <br>
+            <input type="submit" class="btn btn-primary" value="Login">
+            <div class="text-center">
+            <a href="{% url 'register' %}">Do not have an account? Register</a>
+            {% if form.non_field_errors %}
+                {% for err in form.non_field_errors %}
+                    <p class="text-danger">{{err}}</p>
+                {% endfor %}
+            {% endif %}
+</div>
+        </form>
+    </div>
+</div>
+
+
+{% endblock main-content %}

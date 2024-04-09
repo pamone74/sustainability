@@ -1,0 +1,238 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Reduce{% endblock title %}
+
+{% block main-content %}
+<style>
+    .card {
+        border-radius: 10px;
+        margin-bottom: 20px;
+        transition: all 0.3s ease;
+        height: 100%;
+    }
+
+    .card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .card img {
+        border-radius: 10px 10px 0 0;
+        height: 200px;
+    }
+
+    .crd {
+        padding: 20px;
+        height: px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .card h5 {
+        text-align: center;
+        flex: 1;
+        font-size: medium;
+    }
+
+    .btn {
+        padding: 6px 16px;
+        font-size: 16px;
+        margin-top: auto;
+    }
+
+    body {
+        background-color: #f8f9fa;
+        background-image: linear-gradient(to bottom right, #b7e4c7, #ffffff);
+        background-repeat: no-repeat;
+        background-size: contain;
+    }
+    .hidden {
+        display: none;
+    }
+    /* Media queries */
+    @media (max-width: 576px) {
+        /* Small devices (mobile phones) */
+        .card img {
+            height: 100px; /* Reduce image height for smaller screens */
+        }
+        .crd {
+            padding: 10px; /* Reduce padding for smaller screens */
+        }
+        .btn {
+            font-size: 14px; /* Reduce button font size for smaller screens */
+        }
+    }
+
+    @media (min-width: 577px) and (max-width: 991px) {
+        /* Medium devices (tablets) */
+        .card img {
+            height: 120px; /* Adjust image height for tablets */
+        }
+    }
+
+    @media (min-width: 992px) {
+        /* Large devices (desktops) */
+        .card {
+            height: 100%;
+        }
+    }
+</style>
+
+
+<div class="container-sm my-4">
+    <div class="row">
+        <div class="col">
+            <h4 class="text-start text-success text-center">Reduce</h4>
+            <h6 class="text-start lead text-center">Empowering Change: Reduce, Reuse, and Rethink for a Greener Future</h6>
+            <p class="text-center">Reduce to Earns Reward points</p>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4">
+        <!-- Card 1 -->
+        <div class="col-sm-3 mb-4">
+            <div class="card shadow">
+                <img src="{% static 'image/taxi.jpeg' %}" class="card-img-top" alt="...">
+                <div class="card-body crd">
+                    <h5 class="text-start">Taxi Sharing | Trip sharing</h5>
+                    <p >Reduce your carbon footprint by sharing a taxi with others.</p>
+                    <div class="text-center"> <!-- Center aligning the buttons -->
+                        <a href="#" class="btn btn-success">Share Trips now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Card 2 -->
+        <div class="col-sm-3 mb-4">
+            <div class="card shadow">
+                <img src="{% static 'image/download.jpeg' %}" class="card-img-top" alt="...">
+                <div class="card-body crd">
+                    <h5 class="text-start">Use Public Transport</h5>
+                    <p>Reduce your carbon footprint by using public transport.</p>
+                    <div class="text-center">
+                        <a href="#" class="btn btn-success">Bus schedules</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Card 3 -->
+        <div class="col-sm-3 mb-4">
+            <div class="card shadow">
+                <img src="{% static 'image/solar.jpeg' %}" class="card-img-top" alt="...">
+                <div class="card-body crd">
+                    <h5 class="text-start">Use Renewable Energy</h5>
+                    <p>Reduce your carbon footprint by using renewable energy.</p>
+                    <div class="text-center">
+                        <a href="#" class="btn btn-success">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Card 4 -->
+        <div class="col-sm-3 mb-4">
+            <div class="card shadow">
+                <img src="{% static 'image/R.jpeg' %}" class="card-img-top" alt="...">
+                <div class="card-body crd">
+                    <h5>Protect and Restore Ecosystems</h5>
+                    <p class="hidden" id="hiddenText">Forests, wetlands, and other ecosystems play a crucial role in sequestering carbon dioxide from the atmosphere.</p>
+                    <button class="btn" id="toggleButton">Read More..</button>
+                    <div class="text-center">
+                        <a href="#" class="btn btn-success">Drone for waste</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- This is the second row -->
+    <div class="row">
+        <!-- Card 5 -->
+        <div class="col-sm-3 mb-4">
+            <div class="card shadow">
+                <img src="{% static 'image/home.jpeg' %}" class="card-img-top" alt="...">
+                <div class="card-body crd">
+                    <h5 class="text-start">Energy Efficiency</h5>
+                    <p>Improving energy efficiency in buildings, appliances, and industrial processes can reduce energy consumption and lower emissions.</p>
+                    <div class="text-center">
+                        <a href="#" class="btn btn-success">Use smart Home</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Card 6 -->
+        <div class="col-sm-3 mb-4">
+            <div class="card shadow">
+                <img src="{% static 'image/educate.jpeg' %}" class="card-img-top" alt="...">
+                <div class="card-body crd">
+                    <h5 class="text-start">Educate and Raise Awareness</h5>
+                    <p>Educating yourself and others about climate change and the actions that can be taken to reduce emissions is an important step.</p>
+                    <div class="text-center">
+                        <a href="#" class="btn btn-success">Educate Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Card 7 -->
+        <div class="col-sm-3 mb-4">
+            <div class="card shadow">
+                <img src="{% static 'image/consump.jpeg' %}" class="card-img-top" alt="...">
+                <div class="card-body crd">
+                    <h5 class="text-start">Reduce Consumption and Waste</h5>
+                    <p>Reducing consumption, reusing products, and recycling materials can lower emissions associated with production and disposal.</p>
+                    <div class="text-center">
+                        <a href="#" class="btn btn-success">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Card 8 -->
+        <div class="col-sm-3 mb-4">
+            <div class="card shadow">
+                <img src="{% static 'image/no.jpeg' %}" class="card-img-top" alt="...">
+                <div class="card-body crd">
+                    <h5 class="text-start">Support Climate Policies</h5>
+                    <p>Individuals can advocate for and support policies at the local, national, and international levels to reduce greenhouse gas emissions.</p>
+                    <div class="text-center">
+                        <a href="#" class="btn btn-success">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- This is the third row -->
+    <div class="row">
+        <!-- Card 9 -->
+        <div class="col-sm-3 mb-4">
+            <div class="card shadow">
+                <img src="{% static 'image/reuse.jpeg' %}" class="card-img-top" alt="...">
+                <div class="card-body crd">
+                    <h5 class="text-start">Reuse</h5>
+                    <p>Do you have items you do not use anymore? Do not waste it, share with who needs it. Promotes sustainability by sharing your items.</p>
+                    <div class="text-center">
+                        <a href="#" class="btn btn-success">Reuse Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    // JavaScript to toggle text visibility
+    document.getElementById('toggleButton').addEventListener('click', function() {
+        var hiddenText = document.getElementById('hiddenText');
+        // Toggle the hidden class to hide or display the text
+        hiddenText.classList.toggle('hidden');
+        // Change button text based on text visibility
+        if (hiddenText.classList.contains('hidden')) {
+            this.textContent = 'Show Text';
+        } else {
+            this.textContent = 'Hide Text';
+        }
+    });
+</script>
+{% endblock main-content %}

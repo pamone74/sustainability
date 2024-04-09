@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Recycle{% endblock title %}
+{% block main-content %}
+
+<style>
+    .card {
+        border-radius: 15px;
+        margin-bottom: 20px;
+        transition: all 0.5s ease;
+        height: 100%;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .card:hover {
+        transform: scale(1.25); /* Increase size on hover */
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+    }
+
+    .card:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 50%;
+        width: 150%;
+        height: 150%;
+        background: linear-gradient(-45deg, rgba(255,255,255,0.1), transparent, rgba(255,255,255,0.1));
+        transform: translate(-50%, -50%);
+        z-index: -1;
+        transition: all 0.5s ease;
+        border-radius: 50%;
+        opacity: 0;
+    }
+
+    .card:hover:before {
+        opacity: 1; /* Show the butterfly effect on hover */
+        width: 200%;
+        height: 200%;
+    }
+
+    .card img {
+        border-radius: 15px;
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+    }
+
+    .crd {
+        padding: 20px;
+        height: 100%;
+    }
+
+    .btn {
+        margin-top: auto;
+    }
+
+    /* Adjust font sizes */
+    .card-body {
+        font-size: 14px;
+    }
+
+    .card-title {
+        font-size: 18px;
+    }
+
+    body {
+        background-color: #f8f9fa;
+        background-image: linear-gradient(to bottom right, #b7e4c7, #ffffff);
+        background-repeat: no-repeat;
+        background-size: contain;
+    }
+</style>
+
+<div class="container-sm">
+    <div class="row">
+        <div class="col-sm-12 p-4">
+            <h2 class="text-center text-success">Recycle</h2>
+            <p class="text-center">Transforming your waste products into new items not only prevents them from contaminating the environment but also contributes to environmental conservation.</p>
+            <p class="text-center">Recycle to Earn Reward points</p>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="card">
+                <img src="{% static 'image/recycle-recover.jpeg' %}" class="card-img-top" alt="...">
+                <div class="card-body crd">
+                    <h5 class="card-title text-start">Recycle</h5>
+                    <p>Recycle your products in nearest smart bin, For instructions on how to use the dustbin <a href="#">click here</a></p>
+                    <div class="text-center">
+                        <a href="#" class="btn btn-success">Browse locations</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="card">
+                <img src="{% static 'image/reuse.jpeg' %}" class="card-img-top" alt="...">
+                <div class="card-body crd">
+                    <h5 class="card-title text-start">Reuse</h5>
+                    <p>Do you have items you do not use anymore? Do not waste it, share with who needs it. Promote sustainability by sharing your items.</p>
+                    <div class="text-center">
+                        <a href="{% url 'reuse' %}" class="btn btn-success">Reuse Products</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="card">
+                <img src="{% static 'image/innovate.jpeg' %}" class="card-img-top" alt="...">
+                <div class="card-body crd">
+                    <h5 class="card-title text-start">Innovate</h5>
+                    <p>Turn waste into innovation. Each item is an opportunity for positive change as we lead in waste transformation.</p>
+                    <div class="text-center">
+                        <a href="#" class="btn btn-success">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock main-content %}

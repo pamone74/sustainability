@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Reduce{% endblock title %}
+
+{% block main-content %}
+<div class="">
+    <div class="">
+        <div class="">
+            <h1 class="display-4">Create Product</h1>
+            <p class="lead">Create your Product, Qr code will be generated, track the cycle of your products.</p>
+            <a href="{% url 'create' %}" class="btn btn-primary">Create Now</a>
+        </div>
+
+        <div class="">
+            <h1 class="display-4">Sell Or Transfer Ownership</h1>
+            <p class="lead">Transfer your Product, Qr code will be generated, track the cycle of your products.</p>
+            <a href="{% url 'transfer' %}" class="btn btn-primary">Transfer Now</a>
+        </div>
+    </div>
+</div>
+{% endblock main-content %}

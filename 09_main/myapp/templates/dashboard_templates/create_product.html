@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}
+Add Product
+{% endblock title %}
+
+{% block main-content %}
+{% if submitted %}
+    <div class="container my-5">
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Success!</strong> Product added successfully.
+            <a href="{% url 'create' %}" class="text-end"> Add another product</a>
+        </div>
+    </div>
+{% else %}
+<div class="container">
+    {% if not reject and not not_profile_user %}
+    <div class="row my-3">
+        <div class="col-sm-6 offset-sm-3">
+            <form method="post" action="" enctype="multipart/form-data" class="shadow p-5">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <div class="row">
+                    <div class="col-sm-6">
+                        <button type="submit" class="btn btn-primary">Add Product</button>
+                    </div>
+                    <div class="col-sm-6 text-end">
+                        <a href="{% url 'reuse' %}" class="btn btn-danger ">Cancel</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endif %}
+{% if reject %}
+
+<div class="container my-5">
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Error!</strong> Your are not allowed to add product because your are a Consumer.
+        <p> If you want to add product please contact admin or Update your info here <a href="{% url "update_profile" request.user.id%}" class="text-end"> update </a><p>
+    </div>
+</div>
+{% else %}
+{% if not_profile_user %}
+    <div class="container my-5">
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Error!</strong> Opps Create Your Profile First.
+            <p> Navigate to your Dashboard and create your profile or Update your info here <a href="{% url "create_profile"%}" class="text-end"> Create </a><p>
+        </div>
+    </div>
+{% endif %}
+{% endif %}
+{% endblock main-content %}
