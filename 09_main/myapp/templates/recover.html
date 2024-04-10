@@ -5,6 +5,9 @@
 
 {% block extra_css %}
 <style>
+    /* Rest of your CSS code */
+
+    /* Add styling for border radius */
     .card {
         border-radius: 20px; /* Add border radius */
         margin-bottom: 20px;
@@ -38,8 +41,8 @@
     }
 
     .card:hover {
-        transform: scale(1.25); /* Increase size to 25% */
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3), 0 12px 40px rgba(0, 0, 0, 0.3); /* Adjust shadow */
+        transform: scale(1.05); /* Increase size */
+        box-shadow: 0 8px 10px rgba(0, 0, 0, 0.3), 0 12px 40px rgba(0, 0, 0, 0.3); /* Adjust shadow */
         border-color: rgba(0, 0, 0, 0.3); /* Add border color */
     }
 
@@ -62,6 +65,11 @@
     .card-body {
         padding: 15px;
         margin-top: auto; /* Align content to the bottom */
+    }
+
+    /* Add styling for border radius */
+    .card:hover {
+        border-radius: 25px; /* Adjust border radius on hover */
     }
 </style>
 {% endblock extra_css %}
