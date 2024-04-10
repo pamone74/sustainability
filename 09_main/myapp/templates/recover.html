@@ -6,7 +6,7 @@
 {% block extra_css %}
 <style>
     .card {
-        border-radius: 20px; /* Increase border radius */
+        border-radius: 20px; /* Add border radius */
         margin-bottom: 20px;
         transition: transform 0.3s, box-shadow 0.3s;
         display: flex;
@@ -38,12 +38,12 @@
     }
 
     .card:hover {
-        transform: scale(1.1) rotate(2deg);
+        transform: scale(1.25); /* Increase size to 25% */
         box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3), 0 12px 40px rgba(0, 0, 0, 0.3); /* Adjust shadow */
         border-color: rgba(0, 0, 0, 0.3); /* Add border color */
     }
 
-    @keyframes swing {
+    @keyframes shake {
         0% {
             transform: rotate(2deg);
         }
@@ -56,7 +56,7 @@
     }
 
     .card:hover {
-        animation: swing 0.5s ease;
+        animation: shake 0.5s ease;
     }
 
     .card-body {

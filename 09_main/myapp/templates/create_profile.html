@@ -2,34 +2,63 @@
 {% load static %}
 {% block title %}Update Address{% endblock title %}
 
+{% block extra_css %}
+<style>
+    /* Add shadow effect to input fields on hover */
+    .form-group input[type="text"]:hover,
+    .form-group input[type="email"]:hover,
+    .form-group input[type="password"]:hover {
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Add shadow effect to input fields when focused */
+    .form-group input[type="text"]:focus,
+    .form-group input[type="email"]:focus,
+    .form-group input[type="password"]:focus {
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Reduce input field width */
+    .form-group input[type="text"],
+    .form-group input[type="email"],
+    .form-group input[type="password"] {
+        width: 50%; /* Adjust the width as needed */
+    }
+</style>
+{% endblock extra_css %}
+
 {% block main-content %}
 
 <div class="container">
-    <div class="row">
-        <h2> Welcome {{request.user}}</h2>
-        <div class="col-sm-8 offset-sm-1">
+    <div class="row justify-content-center">
+        <br><br><br>
+        <h2 class="text-center">Welcome {{request.user}}</h2>
+        <div class="col-sm-8">
             <form action="" method="POST">
                 {% csrf_token %}
                 {% for fm in form %}
-                
-                    {{fm.label_tag}} {{fm}} <small class="text-danger">{{fm.errors|striptags}}</small>
-                    <br>
+                    <div class="form-group">
+                        <label for="{{ fm.id_for_label }}">{{ fm.label }}</label>
+                        {{ fm }} <small class="text-danger">{{ fm.errors|striptags }}</small>
+                    </div>
                 {% endfor %}
-                <div class="col-12 mt-3">
+                <br><br>
+                <div class="form-group d-flex justify-content-end">
                     <button type="submit" class="btn btn-primary">Update</button>
-                    <a href="{% url 'address' %}" class="btn btn-secondary">Cancel</a>
+                    <a href="{% url 'address' %}" class="btn btn-secondary ml-2">Cancel</a>
                 </div>
-                <br>
-                <br>
                 {% if form.non_field_errors %}
                     {% for err in form.non_field_errors %}
-                        <p>{{err}}</p>
+                        <div class="alert alert-danger" role="alert">
+                            {{ err }}
+                        </div>
                     {% endfor %}
                 {% endif %}
                 {% if messages %}
-                
                     {% for msg in messages %}
-                        {{msg}}
+                        <div class="alert alert-info" role="alert">
+                            {{ msg }}
+                        </div>
                     {% endfor %}
                 {% endif %}
             </form>
@@ -37,4 +66,3 @@
     </div>
 </div>
 {% endblock main-content %}
-

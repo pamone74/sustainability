@@ -2,6 +2,21 @@
 {% load static %}
 {% block title %}Information{% endblock title %}
 
+{% block extra_css %}
+<style>
+    /* Reduce button size */
+    .btn-lg {
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+    }
+
+    /* Center input fields */
+    .container {
+        text-align: center;
+    }
+</style>
+{% endblock extra_css %}
+
 {% block main-content %}
 
 <div class="container my-5">
@@ -69,14 +84,13 @@
                 </table>
                 <div class="row">
                     <div class="col-md-6">
-                        <a href="{% url 'update_profile' data.pk %}" class="btn btn-primary btn-lg btn-block">Update</a>
+                        <a href="{% url 'update_profile' data.pk %}" class="btn btn-primary btn-md text-start">Update</a>
                     </div>
                     <div class="col-md-6">
-                        <a href="{% url 'passwordchange' %}" class="btn btn-secondary btn-lg btn-block">Change Password</a>
+                        <a href="{% url 'passwordchange' %}" class="btn btn-secondary text-end btn-md btn-danger">Change Password</a>
                     </div>
                 </div>
             </div>
-            
             
             {% endfor %}
             {% else %}

@@ -5,7 +5,7 @@ from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
 import os
 import fitz
-from pyzbar.pyzbar import decode
+#from pyzbar.pyzbar import decode
 from PIL import Image
 import uuid
 import base64
