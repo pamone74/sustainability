@@ -7,10 +7,10 @@ import datetime
 
 
 '''
-There will be five modoles for this projects: 
+There will be five modules for this projects: 
 1. Administrator | or the Authorized personel for tracking the records 
 2. The Producers or the Factories producing the products, custom import
-3. Marchants | wholesalers 
+3. Merchants | wholesalers 
 4. users | retail outlets 
 5. Products 
 
@@ -59,7 +59,7 @@ COUNTRIES = [
     ("CHN", "China"),
     ("UG", "Uganda"),
 ]
-CODITIONS_PRODUCTS_REUSE=[
+CONDITIONS_PRODUCTS_REUSE=[
     ("G", "Good"),
     ("B", "Bad"),
     ("E", "Excellent"),
@@ -145,7 +145,7 @@ class ReuseProducts(models.Model):
     product_quantity = models.IntegerField(_("Quantity"), default=1)
     product_catagories = models.CharField(_("Catagories"), max_length=3, choices=CHOICES_FOR_PRODUCTS, default="RU")
     product_description = models.TextField(_("Description"), blank=False, max_length=100)
-    product_condition = models.CharField(_("Condition"), max_length=50,choices=CODITIONS_PRODUCTS_REUSE, default="Good")
+    product_condition = models.CharField(_("Condition"), max_length=50,choices=CONDITIONS_PRODUCTS_REUSE, default="Good")
     product_image = models.ImageField(_("Image"), upload_to="product_images/", blank=False, null=False)
     product_address = models.TextField(_("Address"), max_length=50)
     product_price = models.DecimalField(_("Price"), max_digits=10, decimal_places=2, default=0) 

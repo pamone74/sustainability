@@ -12,11 +12,6 @@
         height: 100%;
     }
 
-    .card:hover {
-        transform: scale(1.05);
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-
     .card img {
         border-radius: 10px 10px 0 0;
         height: 200px;
@@ -24,7 +19,6 @@
 
     .crd {
         padding: 20px;
-        height: px;
         overflow: hidden;
         display: flex;
         flex-direction: column;
@@ -48,9 +42,28 @@
         background-repeat: no-repeat;
         background-size: contain;
     }
-    .hidden {
-        display: none;
+
+    /* Keyframes for swing animation */
+    @keyframes swing {
+        0% {
+            transform: rotate(-1deg);
+        }
+        50% {
+            transform: rotate(1deg);
+        }
+        100% {
+            transform: rotate(-1deg);
+        }
     }
+
+    /* Card hover styles with swing animation */
+    .card:hover {
+        animation: swing 0.5s ease-in-out;
+        transform-origin: top center; /* Sets the rotation origin to the top center */
+        transform: scale(1.05);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
     /* Media queries */
     @media (max-width: 576px) {
         /* Small devices (mobile phones) */
@@ -92,22 +105,22 @@
 </div>
 
 <div class="container">
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4">
+    <div class="row row-cols-1 row-cols-md-3 row-cols-lg-3">
         <!-- Card 1 -->
-        <div class="col-sm-3 mb-4">
+        <div class="col mb-4">
             <div class="card shadow">
                 <img src="{% static 'image/taxi.jpeg' %}" class="card-img-top" alt="...">
                 <div class="card-body crd">
                     <h5 class="text-start">Taxi Sharing | Trip sharing</h5>
-                    <p >Reduce your carbon footprint by sharing a taxi with others.</p>
-                    <div class="text-center"> <!-- Center aligning the buttons -->
+                    <p>Reduce your carbon footprint by sharing a taxi with others.</p>
+                    <div class="text-center">
                         <a href="#" class="btn btn-success">Share Trips now</a>
                     </div>
                 </div>
             </div>
         </div>
         <!-- Card 2 -->
-        <div class="col-sm-3 mb-4">
+        <div class="col mb-4">
             <div class="card shadow">
                 <img src="{% static 'image/download.jpeg' %}" class="card-img-top" alt="...">
                 <div class="card-body crd">
@@ -120,7 +133,7 @@
             </div>
         </div>
         <!-- Card 3 -->
-        <div class="col-sm-3 mb-4">
+        <div class="col mb-4">
             <div class="card shadow">
                 <img src="{% static 'image/solar.jpeg' %}" class="card-img-top" alt="...">
                 <div class="card-body crd">
@@ -133,25 +146,21 @@
             </div>
         </div>
         <!-- Card 4 -->
-        <div class="col-sm-3 mb-4">
+        <div class="col mb-4">
             <div class="card shadow">
                 <img src="{% static 'image/R.jpeg' %}" class="card-img-top" alt="...">
                 <div class="card-body crd">
                     <h5>Protect and Restore Ecosystems</h5>
-                    <p class="hidden" id="hiddenText">Forests, wetlands, and other ecosystems play a crucial role in sequestering carbon dioxide from the atmosphere.</p>
-                    <button class="btn" id="toggleButton">Read More..</button>
+                    <p class="hidden" id="hiddenText">Forests, wetlands, and other ecosystems play 
+                        a crucial role in sequestering carbon dioxide from the atmosphere.</p>
                     <div class="text-center">
                         <a href="#" class="btn btn-success">Drone for waste</a>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-
-    <!-- This is the second row -->
-    <div class="row">
         <!-- Card 5 -->
-        <div class="col-sm-3 mb-4">
+        <div class="col mb-4">
             <div class="card shadow">
                 <img src="{% static 'image/home.jpeg' %}" class="card-img-top" alt="...">
                 <div class="card-body crd">
@@ -164,7 +173,7 @@
             </div>
         </div>
         <!-- Card 6 -->
-        <div class="col-sm-3 mb-4">
+        <div class="col mb-4">
             <div class="card shadow">
                 <img src="{% static 'image/educate.jpeg' %}" class="card-img-top" alt="...">
                 <div class="card-body crd">
@@ -177,7 +186,7 @@
             </div>
         </div>
         <!-- Card 7 -->
-        <div class="col-sm-3 mb-4">
+        <div class="col mb-4">
             <div class="card shadow">
                 <img src="{% static 'image/consump.jpeg' %}" class="card-img-top" alt="...">
                 <div class="card-body crd">
@@ -190,7 +199,7 @@
             </div>
         </div>
         <!-- Card 8 -->
-        <div class="col-sm-3 mb-4">
+        <div class="col mb-4">
             <div class="card shadow">
                 <img src="{% static 'image/no.jpeg' %}" class="card-img-top" alt="...">
                 <div class="card-body crd">
@@ -202,17 +211,13 @@
                 </div>
             </div>
         </div>
-    </div>
-
-    <!-- This is the third row -->
-    <div class="row">
         <!-- Card 9 -->
-        <div class="col-sm-3 mb-4">
+        <div class="col mb-4">
             <div class="card shadow">
                 <img src="{% static 'image/reuse.jpeg' %}" class="card-img-top" alt="...">
                 <div class="card-body crd">
                     <h5 class="text-start">Reuse</h5>
-                    <p>Do you have items you do not use anymore? Do not waste it, share with who needs it. Promotes sustainability by sharing your items.</p>
+                    <p>Do you have items you do not use anymore? Do not waste it, share with who needs it. Promote sustainability by sharing your items.</p>
                     <div class="text-center">
                         <a href="#" class="btn btn-success">Reuse Now</a>
                     </div>
@@ -221,18 +226,5 @@
         </div>
     </div>
 </div>
-<script>
-    // JavaScript to toggle text visibility
-    document.getElementById('toggleButton').addEventListener('click', function() {
-        var hiddenText = document.getElementById('hiddenText');
-        // Toggle the hidden class to hide or display the text
-        hiddenText.classList.toggle('hidden');
-        // Change button text based on text visibility
-        if (hiddenText.classList.contains('hidden')) {
-            this.textContent = 'Show Text';
-        } else {
-            this.textContent = 'Hide Text';
-        }
-    });
-</script>
+
 {% endblock main-content %}
