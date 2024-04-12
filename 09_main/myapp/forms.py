@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-from .models import Product,AddEvent, ProfileUser, ReuseProducts,Ownership
+from .models import Product,AddEvent, ProfileUser, ReuseProducts,Ownership, CartOwnerShip
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UsernameField, PasswordChangeForm, PasswordResetForm, SetPasswordForm
 from django.contrib.auth.models import User
 
@@ -54,9 +54,11 @@ class RegistrationForm(UserCreationForm):
     password2 = forms.CharField(label="Password confirmation", widget=forms.PasswordInput(attrs={
         "class":"form-control", 
         "placeholder":"Confirm Password"}))
-    ID_number = forms.CharField(max_length=100, widget=forms.TextInput(attrs={
-        "class":"form-control", 
-        "placeholder":"Enter EID Number or Passport"}))
+    ID_number = forms.CharField(max_length=20, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter ID Number', 'pattern': '^(\d{3}-\d{4}-\d{7}-\d{1})$', 'title': 'ID number must be in the format XXX-XXXX-XXXXXXX-X.', 'required': 'required'}))
+
+    # ID_number = forms.CharField(max_length=100, widget=forms.TextInput(attrs={
+        # "class":"form-control", 
+        # "placeholder":"Enter EID Number or Passport"}))
 
     class Meta:
         model = User
@@ -74,13 +76,14 @@ class LoginForm(AuthenticationForm):
     }))
 
 class ProfileForm(ModelForm):
+    phone = forms.CharField(max_length=15, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter Phone Number', 'pattern': '[0-9]{10,15}', 'title': 'Mobile phone number must be between 10 and 15 digits', 'required': 'required'}))
     class Meta:
         model = ProfileUser
-        fields = ['full_name','address', 'phone', 'city', 'country_origin',"user_type"]
+        fields = ['profile_picture','full_name','address', 'phone', 'city', 'country_origin',"user_type"]
         widgets = {
+            "profile_picture": forms.FileInput(attrs={"class":"form-control", "placeholder":"Profile Picture"}),
             "full_name": forms.TextInput(attrs={"class":"form-control", "placeholder":"Enter Full Name"}),
             "address": forms.TextInput(attrs={"class":"form-control", "placeholder":"Enter Address"}),
-            "phone": forms.TextInput(attrs={"class":"form-control", "placeholder":"Enter Phone Number"}),
             "city": forms.Select(attrs={"class":"form-control", "placeholder":"Enter City"}),
             "country_origin": forms.Select(attrs={"class":"form-control", "placeholder":"Enter Country Origin"}),
             "user_type": forms.Select(attrs={"class":"form-control", "placeholder":"Enter User Type"}),
@@ -134,7 +137,7 @@ class ReuseProductForm(ModelForm):
             "product_condition": forms.Select(attrs={"class":"form-control", "placeholder":"Enter Product Condition"}),
             "product_image": forms.FileInput(attrs={"class":"form-control", "placeholder":"Enter Product Image"}),
             "product_description": forms.Textarea(attrs={"class":"form-control", "placeholder":"Enter Product Description"}),
-            "product_address": forms.TextInput(attrs={"class":"form-control", "placeholder":"Enter Product Address"}),
+            "product_address": forms.Textarea(attrs={"class":"form-control", "placeholder":"Enter Product Address"}),
         }
 
 
@@ -145,12 +148,14 @@ class TransferOwnershipForm(ModelForm):
         super().__init__(*args, **kwargs)
         if user:
             # Filter queryset of product field based on current user
-            self.fields['product'].queryset = Product.objects.filter(product_ownership=user)
+            # self.fields['product'].queryset = Product.objects.filter(product_ownership=user)
+            user = User.objects.get(username=user)
+            self.fields['product_cart'].queryset = CartOwnerShip.objects.filter(user=user)
     class Meta:
         model = Ownership
-        fields = ['new_owner','product', 'product_quantity', 'status',]
+        fields = ['new_owner','product_cart', 'product_quantity', 'status',]
         widgets = {
-            "product": forms.Select(attrs={"class":"form-control", "placeholder":"Enter Product"}),
+            "product_cart": forms.Select(attrs={"class":"form-control", "placeholder":"Enter Product"}),
             "product_quantity": forms.NumberInput(attrs={"class":"form-control", "placeholder":"Enter Product Quantity"}),
             "status": forms.Select(attrs={"class":"form-control", "placeholder":"Enter Status"}),
             "new_owner": forms.Select(attrs={"class":"form-control", "placeholder":"Enter New Owner"}), 

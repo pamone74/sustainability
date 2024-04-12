@@ -5,6 +5,7 @@ from .forms import LoginForm, PasswordResetForm, MySetPasswordForm, PasswordChan
 from django.conf import settings 
 from django.contrib import admin
 from django.conf.urls.static import static
+from django.urls import path, include
 
 urlpatterns = [
     #Amone's url
@@ -22,7 +23,9 @@ urlpatterns = [
     path("address/", views.Profileview.as_view(), name="address"),
     path("index/", views.home, name="index"),
     path("logout/", auth_views.LogoutView.as_view(next_page="index"), name="logout"),
-    path("dashboard/", views.dashboard, name="dashboard"),
+    path("dashboard/", views.dashboard, 
+    name="dashboard"),
+    
     
     path("update_profile/<int:pk>", views.UpdateInformation.as_view(), name="update_profile"),
     path("create_profile/",views.Profileview.as_view(), name="create_profile"),
@@ -35,6 +38,7 @@ urlpatterns = [
     path("dashboard_templates/dashboard/", views.dashboard, name="dashboard"),
     path("dashboard_templates/create_product/", views.create_product, name="create_product"),
     path("contact/", views.contact, name="contact"),
+    path("pending-recycle/", views.pending,name="pending"), 
 
 # Password Reset
     path("password-change/", auth_views.PasswordChangeView.as_view(template_name="passwordchange.html", form_class=MyPasswordChangeForm, success_url='/passwordchangedone/'),
@@ -63,6 +67,7 @@ urlpatterns = [
     path("my-products/", views.display_my_product, name="my_products"),
     path("update-my-products/<int:pk>", views.MyProducts.as_view(), name="update_my_products"),
     path("delete-my-products/<int:pk>", views.DeleteMyProducts.as_view(), name="delete_my_products"),
+    
 
 
 # Themes
@@ -75,5 +80,7 @@ urlpatterns = [
 
 #smart Bin
     # path("smartbin/", views.SmartBin.as_view(), name="smartbin"),
+    path("smart-bin/recycle/ownership", views.SmartBinRecycle, name="smartbin"),
+    path("smart-bin/recycle/ownership/user", views.Userviewsets, name="resource-detail"),
     
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

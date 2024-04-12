@@ -75,12 +75,15 @@ def generate_pdf(item_list, pdf_filename):
             c.drawString(50, y, f"Item Name: {item_list['name']}")
             c.drawImage(item_list["qr_filename"], 50, y-110, width=100, height=100)
             y -= 130
+            c.save()
+            os.remove(item_list["qr_filename"])
         else:
             for item in item_list:
                 c.drawString(50, y, f"Item Name: {item['name']}")
                 c.drawImage(item["qr_filename"], 50, y-110, width=100, height=100)
                 y -= 130
-        c.save()  
+                c.save()
+                # os.remove(item["qr_filename"])
         return pdf_filename
 
 

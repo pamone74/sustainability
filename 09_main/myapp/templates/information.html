@@ -19,30 +19,35 @@
 
 {% block main-content %}
 
-<div class="container my-5">
+<div class="container my-2 bg-light rounded-end p-5">
     <div class="row justify-content-between">
         <div class="col-auto">
-            <h3>{{ user.username | capfirst }} Welcome to your Dashboard</h3>
+            <h3 class="display-7"> Welcome {{info.full_name}} to your Profile</h3>
         </div>
         <div class="col-auto">
-            <h3>Reward Points: 0</h3>
+            <h3>Reward Points: {{total}}</h3>
         </div>
     </div>
-    <hr class="border border-danger border-3 opacity-50">
-    <div class="row">
+    <hr class="border border-danger opacity-50">
+    <div class="row shadow p-5 bg-light rounded-end my-3">
         <div class="col-sm-3">
-            <ul class="list-group">
+            <ul class="list-group px-5 py-3">
+                {% if info.profile_picture and info.profile_picture.url %}
+                    <img src="{{info.profile_picture.url}}" alt="User" class="img-fluid " style="height: 100px; width: 100px; overflow: hidden; border-radius: 50%; margin: 0 auto; border: 1px solid #ccc; padding: 5px; background-color: #fff; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+                {% endif %}
+                <br><br>
                 <li class="list-group-item"><a href="{% url 'information' %}" class="btn btn-primary btn-block">Profile</a></li>
+                <!--
                 <li class="list-group-item"><a href="{% url 'analytics' %}" class="btn btn-secondary btn-block">Analytics</a></li>
                 <li class="list-group-item"><a href="{% url 'carbon' %}" class="btn btn-secondary btn-block">Carbon Footprint</a></li>
                 <li class="list-group-item"><a href="{% url 'recycables' %}" class="btn btn-secondary btn-block">Pending Recycables</a></li>
                 <li class="list-group-item"><a href="{% url 'cart' %}" class="btn btn-secondary btn-block">My Cart</a></li>
+                -->
             </ul>
         </div>
 
         <div class="col-sm-9">
             {% if info %}
-            {% for data in info %}
             <div class="container">
                 <table class="table table-striped">
                     <thead>
@@ -54,45 +59,47 @@
                     <tbody>
                         <tr>
                             <td>FULL NAME</td>
-                            <td>{{ data.full_name | upper }}</td>
+                            <td>{{ info.full_name | upper }}</td>
                         </tr>
                         <tr>
                             <td>CITY</td>
-                            <td>{{ data.get_city_display | upper }}</td>
+                            <td>{{ info.get_city_display | upper }}</td>
                         </tr>
                         <tr>
                             <td>PHONE</td>
-                            <td>{{ data.phone | upper }}</td>
+                            <td>{{ info.phone | upper }}</td>
                         </tr>
                         <tr>
                             <td>EMAIL</td>
-                            <td>{{ data.email }}</td>
+                            <td>{{ info.email }}</td>
                         </tr>
                         <tr>
                             <td>ADDRESS</td>
-                            <td>{{ data.address | upper }}</td>
+                            <td>{{ info.address | upper }}</td>
                         </tr>
                         <tr>
                             <td>DATE CREATED</td>
-                            <td>{{ data.date_created }}</td>
+                            <td>{{ info.date_created }}</td>
                         </tr>
                         <tr>
                             <td>DATE UPDATED</td>
-                            <td>{{ data.date_updated }}</td>
+                            <td>{{ info.date_updated }}</td>
+                        </tr>
+                        <tr>
+                            <td>USER CATAGORY</td>
+                            <td>{{ info.get_user_type_display }}</td>
                         </tr>
                     </tbody>
                 </table>
                 <div class="row">
                     <div class="col-md-6">
-                        <a href="{% url 'update_profile' data.pk %}" class="btn btn-primary btn-md text-start">Update</a>
+                        <a href="{% url 'update_profile' info.pk %}" class="btn btn-primary btn-md text-start">Update</a>
                     </div>
                     <div class="col-md-6">
                         <a href="{% url 'passwordchange' %}" class="btn btn-secondary text-end btn-md btn-danger">Change Password</a>
                     </div>
                 </div>
             </div>
-            
-            {% endfor %}
             {% else %}
             <div class="row justify-content-between">
                 <div class="col-auto">

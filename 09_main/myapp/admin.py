@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Product, Ownership, AddEvent,ReuseProducts
+from .models import Product, Ownership, AddEvent,ReuseProducts, CartOwnerShip
 
 @admin.register(Ownership)
 class OwnershipAdmin(admin.ModelAdmin):
@@ -15,7 +15,7 @@ class OwnershipAdmin(admin.ModelAdmin):
         return None
     # def get_quantity(self, obj):
         # return obj.user.product_quantity if obj.user.product_quantity else obj.user.product_quantity
-    ordering = ('user',)
+    ordering = ('-date',)
     search_fields = ('user',)
     filter = ('product',)
 
@@ -31,3 +31,9 @@ class ReuseProductsAdmin(admin.ModelAdmin):
     search_fields = ('product_name', 'product_catagories')
     list_filter = ('product_catagories', 'product_name')
     ordering = ('product_catagories', 'product_name')
+
+@admin.register(CartOwnerShip)
+class CartOwnershipAdmin(admin.ModelAdmin):
+    list_display = ('user', 'product', 'quantity', 'mode','date')
+    search_fields = ('user',)
+    ordering = ('user',)

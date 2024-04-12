@@ -29,12 +29,12 @@
 
 {% block main-content %}
 
-<div class="container">
+<div class="container my-5">
     <div class="row justify-content-center">
         <br><br><br>
         <h2 class="text-center">Welcome {{request.user}}</h2>
-        <div class="col-sm-8">
-            <form action="" method="POST">
+        <div class="col-sm-6">
+            <form action="" method="POST" class='shadow p-5'>
                 {% csrf_token %}
                 {% for fm in form %}
                     <div class="form-group">
@@ -43,7 +43,7 @@
                     </div>
                 {% endfor %}
                 <br><br>
-                <div class="form-group d-flex justify-content-end">
+                <div class="form-group d-flex justify-content-end my-3">
                     <button type="submit" class="btn btn-primary">Update</button>
                     <a href="{% url 'address' %}" class="btn btn-secondary ml-2">Cancel</a>
                 </div>

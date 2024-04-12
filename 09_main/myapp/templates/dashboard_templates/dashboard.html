@@ -233,7 +233,11 @@
 							</li>
 							<li class="nav-item dropdown header-profile">
 								<a class="nav-link" href="javascript:void(0);" role="button" data-bs-toggle="dropdown">
+									{% if profile.profile_picture and profile.profile_picture.url %}
+									<img src="{{profile.profile_picture.url}}" width="20" alt="" />
+									{% else %}
 									<img src="{% static 'dashboard_static/img/man (1).png' %}" width="20" alt="" />
+									{% endif %}
 									<div class="header-info">
 										<span>{{user.username |capfirst}}</span>
 									</div>
@@ -320,6 +324,11 @@
 							<span class="nav-text">Recover</span>
 						</a>
 					</li>
+					<li><a href="{% url 'pending' %}">
+						<i class="flaticon-contract"></i>
+						<span class="nav-text">Pending Recycle</span>
+					</a>
+				</li>
 				</ul>
 			</div>
 		</div>
@@ -374,7 +383,7 @@
 							<div class="card-body box-style">
 								<div class="media align-items-center">
 									<div class="media-body me-3">
-										<h4 class="count num-text text-black font-w400">100</h4>
+										<h4 class="count num-text text-black font-w400"> {{total_products}}</h4>
 										<span class="fs-14">Pending Recycle</span>
 									</div>
 									<svg width="36" height="36" viewBox="0 0 36 36" fill="none">
@@ -392,6 +401,7 @@
 							<div class="card-body box-style">
 								<div class="media align-items-center">
 									<div class="media-body me-3">
+										<!-- need to implement-->
 										<h4 class="count num-text text-black font-w500">500</h4>
 										<span class="fs-14">Recycled</span>
 									</div>
@@ -437,7 +447,7 @@
 							<div class="card-body box-style">
 								<div class="media align-items-center">
 									<div class="media-body me-3">
-										<h2 class="count num-text text-black font-w500">1200</h2>
+										<h2 class="count num-text text-black font-w500"> {{total_points}}</h2>
 										<span class="fs-14">Total Rewards</span>
 									</div>
 									<svg width="46" height="46" viewBox="0 0 46 46" fill="none">
@@ -561,8 +571,12 @@
 									<div class="card-body">
 										<div class="text-center">
 											<div class="profile-photo">
-												<img src="{% static 'dashboard_static/img/man.png' %}" width="100"
+												{% if profile.profile_picture and profile.profile_picture.url %}
+													<img src="{{profile.profile_picture.url}}"  alt="" style="height: 100px; width: 100px; overflow: hidden; border-radius: 50%; margin: 0 auto; border: 1px solid #ccc; padding: 5px; background-color:#fff; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);" />
+													{% else %}
+													<img src="{% static 'dashboard_static/img/man.png' %}" width="100"
 													class="img-fluid rounded-circle" alt="">
+													{% endif %}
 											</div>
 											<h3 class="mt-4 mb-1">{{user.username |capfirst}}</h3>
 											<p class="text-muted">Rank #23</p>

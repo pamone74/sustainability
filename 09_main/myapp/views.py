@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Product, ProfileUser, ReuseProducts, Cart, Customer,Ownership
+from .models import Product, ProfileUser, ReuseProducts, Cart, Customer,Ownership, CartOwnerShip
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from .forms import NameForm, ProductForm, EventForm, RegistrationForm, ProfileForm, ReuseProductForm, TransferOwnershipForm, SmartDustBinForm   
 from django.views import View
@@ -21,6 +21,13 @@ import os
 import shutil
 import base64
 from django.db import transaction
+from rest_framework import viewsets
+from .serializers import ProductSerializer , ProfileUserSerializer, OwnershipSerializer
+from rest_framework import permissions
+from django.views.decorators.csrf import csrf_exempt
+from django.core.paginator import Paginator
+from django.db.models import F
+
 
 #Amone's views 
 def get_date():
@@ -83,7 +90,7 @@ class Registration(View):
             messages.warning(request, "Invalid Data")
         return HttpResponseRedirect("/account/login/")
 
-
+# Updating profile once the user just created the Account
 class Profileview(View):
     def get(self, request):
       form = ProfileForm()
@@ -91,16 +98,24 @@ class Profileview(View):
     def post(self, request):
         form = ProfileForm(request.POST)
         if form.is_valid():
-            user = request.user
-            name = form.cleaned_data["full_name"]
-            city = form.cleaned_data["city"]
-            address = form.cleaned_data["address"]
-            phone = form.cleaned_data["phone"]
-            country_progin = form.cleaned_data["country_origin"]
-            country = "UAE"
-            email = request.user.email
             reg_date = date.today()
-            reg = ProfileUser(user=user, full_name=name,address=address,city=city, phone=phone, date_created=reg_date,date_updated=reg_date, country=country, country_origin=country_progin, email=email)
+            reg = ProfileUser(
+                user=request.user, 
+                full_name=form.cleaned_data["full_name"],
+                address=form.cleaned_data["address"],
+                city=form.cleaned_data["city"], 
+                phone=form.cleaned_data["phone"], 
+                date_created=reg_date,
+                date_updated=reg_date, 
+                country="UAE", 
+                country_origin=form.cleaned_data["country_origin"], 
+                email=request.user.email,
+                reuse_rewards=50,
+                recycle_rewards=50,
+                recover_rewards=50,
+                reduce_rewards=50,
+                user_type= form.cleaned_data["user_type"]
+                )
             reg.save()
             messages.success(request, "Profile Updated")
             return HttpResponseRedirect("/information/")
@@ -111,7 +126,11 @@ class Profileview(View):
 
 
 def Information(request):
-    info = ProfileUser.objects.filter(user=request.user)
+    info = ProfileUser.objects.get(user=request.user)
+    if info:
+        total = info.reuse_rewards + info.recycle_rewards + info.recover_rewards + info.reduce_rewards
+    else:
+        total = 0
     return render(request, "information.html", locals())
 
 # This is a dummy view function just as a placeholder for the dashboard urls
@@ -128,16 +147,24 @@ def home(request):
 def index(request):
     return render(request, 'base_login.html', {})
 
+# ================= User Dashboard on login ==================================================================================================
+# ================= This is the user dashboard that will be displayed once the user logs in===================================================
 def dashboard(request):
-    return render(request, 'dashboard_templates/dashboard.html', {})
+    profile = ProfileUser.objects.get(user=request.user)
+    total_points = profile.reuse_rewards + profile.recycle_rewards + profile.recover_rewards + profile.reduce_rewards
+    try:
+        total_products = CartOwnerShip.objects.filter(user=request.user).count()
+    except ObjectDoesNotExist:
+        total_products = 0
+    return render(request, 'dashboard_templates/dashboard.html', locals())
 
 def create_product(request):
-    return render(request, 'create_product.html', {})
+    return render(request, 'create_product.html',{})
 
 def contact(request):
     return render(request, 'contact.html', {})
 
-
+# ==================== This is the function that will be used to update the user profile =====================================================
 class UpdateInformation(View):
     def get(self, request, pk):
         obj = ProfileUser.objects.get(pk=pk)
@@ -145,7 +172,8 @@ class UpdateInformation(View):
         return render(request, "update.html", locals())
     def post(self, request, pk):
         obj = ProfileUser.objects.get(pk=pk)
-        form = ProfileForm(request.POST, instance=obj)
+        form = ProfileForm(request.POST, request.FILES,instance=obj)
+        print("I am here")
         if form.is_valid():
             form.save()
             messages.success(request, "Profile Updated")
@@ -363,12 +391,16 @@ class CreateProduct(View):
                 form.instance.product_ownership = user
                 # If the qr_code retuned lists of QRCODES, then they are stored in a pdf
                 if isinstance(qr_code, list):
+                    #  We generate the unique Id and decode into  utf-8 format
                     uuid_cal = uuid.uuid1()
                     unid_bytes = uuid_cal.bytes
                     encoded_base = base64.urlsafe_b64encode(unid_bytes).decode('utf-8')
-                    form.instance.product_id = str(encoded_base+"PDF")
+                    # form.instance.product_id = str(encoded_base+"PDF")
+                    unique_id = str(encoded_base+"PDF")
                     with open(generate_pdf(qr_code, f"{current_date}.pdf"), "rb") as f:
                         form.instance.product_pdf.save(f"{current_date}{user}.pdf", f, save=True)
+                    ownership = Ownership(user=request.user, product=form.instance, status="NO", new_owner=user, product_quantity=form.cleaned_data["product_quantity"], action="Added product", product_uid=unique_id)
+
                 else:
                     unique_id = qr_code.get("random_number", None)
                     form.instance.product_id = unique_id
@@ -380,11 +412,12 @@ class CreateProduct(View):
                             form.instance.product_pdf.save(f"{current_date}{user}.pdf", f, save=True)
                         shutil.move(qr_code_filename, "media/")
                         os.remove(f"{current_date}.pdf")
-
-                ownership = Ownership(user=request.user, product=form.instance, status="NO", new_owner=user, product_quantity=form.cleaned_data["product_quantity"], action="Added product", product_uid=unique_id)
+                        ownership = Ownership(user=request.user, product=form.instance, status="NO", new_owner=user, product_quantity=form.cleaned_data["product_quantity"], action="Added product", product_uid=unique_id)
+                cart_update = CartOwnerShip(user=request.user, product=form.instance,mode="Added Product", quantity = form.cleaned_data["product_quantity"], product_uid=unique_id)
 
                 form.save()
                 ownership.save()
+                cart_update.save()
                 messages.success(request, "Product Created")
                 return HttpResponseRedirect("/create/?submitted=True")
             else:
@@ -430,84 +463,224 @@ class TransferProduct(View):
         if user.user_type == "MC":
             form = TransferOwnershipForm(request.POST, request.FILES, user=request.user)
             if form.is_valid():
-                chosen_product = form.cleaned_data["product"]
+                chosen_product = form.cleaned_data["product_cart"]
                 chosen_product_qty = form.cleaned_data["product_quantity"]
                 product = Product.objects.filter(product_name=chosen_product).first()
+                cart_product = CartOwnerShip.objects.filter(product=product).first()
                 product_id = product.product_id
                 if chosen_product_qty == 0:
                     messages.warning(request, "Quantity cannot be 0")
                     return render(request,"transfer_product.html", locals())
-                if product.product_quantity < chosen_product_qty and chosen_product_qty > 0:
+                if cart_product.quantity < chosen_product_qty and chosen_product_qty > 0:
                     self.denied = True
                     self.no_product = True
                     messages.warning(request, "Quantity Greater than available")
                     return render(request,"transfer_product.html", locals())
-                form.instance.user = request.user
-                form.instance.action = "Transfered product"
-                form.instance.product_uid = product_id
-                Product.objects.filter(pk=product.pk).update(product_quantity=product.product_quantity - chosen_product_qty)
-                form.save()
+                ownership = Ownership(
+                    user=request.user,
+                    product=product, 
+                    status="NO", 
+                    new_owner=form.cleaned_data["new_owner"], 
+                    product_quantity=chosen_product_qty, 
+                    action="Transfered product",
+                    product_uid=product_id
+                    )
+                ownership.save()
+                # Getting uer instance and product instance
+                user_instance = User.objects.get(username=form.cleaned_data["new_owner"])
+                product_instance = Product.objects.filter(pk=product.pk).first()
+                cart_update = CartOwnerShip(user=user_instance, product=product_instance,mode=f"Tranfered by {request.user}",quantity = chosen_product_qty, product_uid=product_id)
+                # First tranfer then update the database
+
+                cart_update.save()
+
+                # Once the user has transfered the products, we need to delete it from him since the product has been transferedto another user
+
+                obj = CartOwnerShip.objects.filter(user=request.user, product=product_instance).first()
+                print(obj)
+                obj.delete()
+                
                 messages.success(request, "Product Transfered")
                 return HttpResponseRedirect("/transfer/?transfer_product=True")
             else:
                 form = TransferOwnershipForm(user=request.user)
                 messages.warning(request, "Invalid Data")
-            return render(request, "transfer_product.html", locals())
+        return render(request, "transfer_product.html", locals())
+
 def create_tranfer(request):
-    return render(request, "create_tranfer_page.html")
+    items = CartOwnerShip.objects.filter(user=request.user)
+    return render(request, "create_tranfer_page.html", locals())
+
+def pending(request):
+    items = CartOwnerShip.objects.filter(user=request.user)
+    # For the total, we need to calculate the total Qunatity not the number of items that are in the cart
+    # here i am caluculating the number just
+    total = items.count()
+    return render(request, "pending_recyles.html", locals())    
 
 
+# ============ This is Hardware part =============================
 
-#  Smart BIN
-# class SmartBin(View):
-#    def get(slef, request):
-        #  form = SmartDustBinForm()
-        #  return render(request, "smart_dust_bin.html", locals())
-#    def post(self, request):
-    # form = SmartDustBinForm(request.POST)
-    # if form.is_valid():
-        # user = form.cleaned_data["name"]
-        # location = form.cleaned_data["location"]
-        # product_code = form.cleaned_data["product_code"].strip()
-        # product_name_f = form.cleaned_data["product_name"]
-        # print(product_code)
-        # prof_user = ProfileUser.objects.get(user=request.user)
-        # Assuming there's a field in Product model called 'pdf_filename' to store the PDF filename
-        # with transaction.atomic():
-            # try:
+#  This views is for serializing the data to be sent to the frontend as JASON data
+class ProductViewSet(viewsets.ModelViewSet):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
 
-                # cart_products = Product.objects.get(product_id = str(product_code))
-                # pdt_qty = cart_products.product_quantity
-                # print(pdt_qty)
-                # if pdt_qty > 0:
-                    # cart_products.product_quantity -= 1
-                    # cart_products.save()
-                # else:
-                    # messages.warning(request, "Product quantity is already zero")
-                # # # ownership = Ownership(user=cart_products.product_ownership, product=cart_products.product_name, status="RC",   new_owner=cart_products.product_ownership,product_quantity=cart_products.product_quantity, action="Recycled product",product_uid=cart_products.product_id)
-                # print("i an here")
-                # ownership.save()
-                # messages.success(request, "Product recycled succesfully")
-                # return HttpResponseRedirect("/create/")
-            # except:
-                # messages.warning(request, "Product Not found")
+class ProfileUserViewSet(viewsets.ModelViewSet):
+    queryset = ProfileUser.objects.all()
+    serializer_class = ProfileUserSerializer
+    permission_classes = [permissions.IsAuthenticated]
+# @csrf_exempt
+class OwnershipViewSet(viewsets.ModelViewSet):
+    queryset = Ownership.objects.all()
+    serializer_class = OwnershipSerializer
+    permission_classes = [permissions.IsAuthenticated]
+# @exempt_crsf
 
-        # Check if the items quantity associated with the ID is greater than 1, if so, i means all their qr code are stored in pdf.
-        # if cart_products.product_quantity > 1:
-            # for product in cart_products:
-                # if extract_images_from_pdf( product.product_qr_code.path, str(product_code)):
-                    # pd_qty = product.product_quantity
-                    # if pd_qty > 0:
-                        # product.product_quantity -= 1
-                        # product.save()
-                    # else:
-                        # messages.warning(request, "Product quantity is already zero")
-                    # break
-                # else:
-                    # messages.warning(request, "Product Not found")
-        # else:
-            # if read_qr_code()
-        # return HttpResponseRedirect("/smartbin/")
-    # else:
-        # messages.warning(request, "Invalid Data")
-    # return render(request, "smart_dust_bin.html", locals())
+@csrf_exempt
+def SmartBinRecycle(request):
+    if request.method == "GET":
+        queryset = Ownership.objects.all()
+        ownership_serializer = OwnershipSerializer(queryset,many=True, context={"request": request})
+        return JsonResponse(ownership_serializer.data,status=200, safe=False)
+    if request.method =="POST":
+        flag = True
+        user = ""
+        product_id = ""
+        data = request.POST
+        for key, value in data.items():
+            if key == "user":
+                user = value
+            elif key == "product_id":
+                product_id = value
+        if user and product_id:
+            #  i have to check the status if it is recyled or not yet
+            user = User.objects.get(username=user)
+            profile_user = ProfileUser.objects.filter(user=user).first()
+            product = Product.objects.filter(product_id=product_id).first()
+            cart_profile = CartOwnerShip.objects.filter(user=user, product=product).first()
+            if not cart_profile:
+                # if it retuebed Null, it means that the product is not associated with the 
+                # username, so we need to add the product to the database and update the ownership
+                # If cart_profile is None, handle the case appropriately
+                # For now, I am just creating a new product and ownership
+                id = uuid()
+                Product.objects.create(
+                    product_id=id,
+                    product_name="Recovery",
+                    manufacturer_name=user,
+                    manufacture_location="AD",
+                    product_type="RC",
+                    product_quantity=1,
+                    product_mf_date=datetime.datetime.now(),
+                    product_expiry_date=datetime.datetime.now(),
+                    product_ownership=profile_user,
+                    product_pdf=None,
+                    product_qr_code=None
+                )
+                ProfileUser.objects.filter(user=user).update(recycle_rewards=F('recover_rewards') + 50)
+                return JsonResponse({"Recover": "recovery."}, status=404)
+            else:
+                Ownership.objects.create(
+                user=user,
+                product=product,
+                status="RC",
+                new_owner=profile_user,
+                product_quantity=1,
+                action="Recycled product",
+                product_uid=product_id,
+                product_cart=cart_profile
+            )
+        
+                cart_update = CartOwnerShip.objects.get(product=product)
+                # We may ned to make sure the quantity is zero then we can remove otherwise just subtract
+                # But for now i am using just one item. 
+                if cart_update:
+                    cart_update.delete()
+                    # After recycling, give the person points
+                    ProfileUser.objects.filter(user=user).update(recycle_rewards=F('recycle_rewards') + 50)
+                return JsonResponse({"status": "success"}, status=201)
+    else:
+        return JsonResponse({"Error": "failed"}, status=404)
+    
+
+from django.http import JsonResponse
+# optimized function
+def SmartBinRecycleOpt(request):
+    if request.method == "POST":
+        user = request.POST.get("user")
+        product_id = request.POST.get("product_id")
+
+        if user and product_id:
+            try:
+                user = User.objects.get(username=user)
+                profile_user = ProfileUser.objects.filter(user=user).first()
+                product = Product.objects.filter(product_id=product_id).first()
+                cart_profile = CartOwnerShip.objects.filter(user=user, product=product).first()
+
+                if not cart_profile:
+                    # If cart_profile is None, handle the case appropriately
+                    # For now, I am just creating a new product and ownership
+                    id = uuid()
+                    Product.objects.create(
+                        product_id=id,
+                        product_name="Recovery",
+                        manufacturer_name=user,
+                        manufacture_location="AD",
+                        product_type="RC",
+                        product_quantity=1,
+                        product_mf_date=datetime.datetime.now(),
+                        product_expiry_date=datetime.datetime.now(),
+                        product_ownership=profile_user,
+                        product_pdf=None,
+                        product_qr_code=None
+                    )
+                    print("Cart profile does not exist for this user and product.")
+                    return JsonResponse({"Recover": "Cart profile does not exist for this user and product."}, status=404)
+
+                Ownership.objects.create(
+                    user=user,
+                    product=product,
+                    status="RC",
+                    new_owner=profile_user,
+                    product_quantity=1,
+                    action="Recycled product",
+                    product_uid=product_id,
+                    product_cart=cart_profile
+                )
+
+                # Delete the CartOwnerShip object
+                if cart_profile:
+                    cart_profile.delete()
+                    # After recycling, give the person points
+                    ProfileUser.objects.filter(user=user).update(recycle_rewards=F('recycle_rewards') + 50)
+
+                return JsonResponse({"status": "success"}, status=201)
+            except Exception as e:
+                print(f"Error: {e}")
+                return JsonResponse({"Error": str(e)}, status=500)
+        else:
+            return JsonResponse({"Error": "Missing user or product_id"}, status=400)
+    else:
+        return JsonResponse({"Error": "Method not allowed"}, status=405)
+
+
+@csrf_exempt
+def Userviewsets(request):
+    from .serializers import UserSerializer
+    if request.method == "GET":
+        queryset = User.objects.all()
+        user = UserSerializer(queryset, many=True, context={"request": request})
+        return JsonResponse(user.data, status=200, safe=False)
+    if request.method == "POST":
+        data = request.POST
+        print(data)
+        for key, value in data.items():
+            print(key,value)
+            if key == "user":
+                return JsonResponse({"status": "success"}, status=201)
+            elif key == "NotFound":
+                return JsonResponse({"Error": "failed"}, status=404)
+                
+    return JsonResponse({"Error": "failed"}, status=404)
+    

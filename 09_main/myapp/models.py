@@ -7,10 +7,10 @@ import datetime
 
 
 '''
-There will be five modules for this projects: 
+There will be five modoles for this projects: 
 1. Administrator | or the Authorized personel for tracking the records 
 2. The Producers or the Factories producing the products, custom import
-3. Merchants | wholesalers 
+3. Marchants | wholesalers 
 4. users | retail outlets 
 5. Products 
 
@@ -59,7 +59,7 @@ COUNTRIES = [
     ("CHN", "China"),
     ("UG", "Uganda"),
 ]
-CONDITIONS_PRODUCTS_REUSE=[
+CODITIONS_PRODUCTS_REUSE=[
     ("G", "Good"),
     ("B", "Bad"),
     ("E", "Excellent"),
@@ -75,13 +75,14 @@ CONDITIONS_PRODUCTS_REUSE=[
 ]
 ACTION = [
     ("T", "Transfer"),
-    ("A", "Add"),
+    ("A", "Added"),
     
     ]
 class ProfileUser(models.Model):
+    profile_picture = models.ImageField(_("Profile Picture"), upload_to="profile_pictures/", blank=True)
     user = models.OneToOneField(User, verbose_name=_("User"), on_delete=models.CASCADE)
     address = models.CharField(_("Address"), max_length=50)
-    phone = models.CharField(_("Phone"), max_length=10)
+    phone = models.CharField(_("Phone"), max_length=15)
     full_name = models.CharField(_("Full Name"), max_length=50, null=False, blank=False, default="")
     city = models.CharField(_("City"), max_length=50,choices=MANUFACTURE_LOCATION_CHOICES, default="AD")
     country = models.CharField(_("Country"), max_length=50)
@@ -90,6 +91,11 @@ class ProfileUser(models.Model):
     date_updated = models.DateTimeField(_("Date Updated"), auto_now=True, auto_now_add=False)
     email =     models.EmailField(_("email"), max_length=20, default="")
     user_type = models.CharField(_("User Type"), max_length=50, choices=CHOICES_FOR_USERS, default="CS")
+    reuse_rewards = models.IntegerField(_("Reuse Rewards"), default=50)
+    recycle_rewards = models.IntegerField(_("Recycle Rewards"), default=50)
+    recover_rewards = models.IntegerField(_("Recover Rewards"), default=50)
+    reduce_rewards = models.IntegerField(_("Reduce Rewards"), default=50)
+    # reward_points_total = models.IntegerField(_("Reward Points"), default=0)
     def __str__(self):
         return self.user.username
 
@@ -111,16 +117,26 @@ class Product(models.Model):
     def __str__(self):
         return self.product_name
 
+class CartOwnerShip(models.Model):
+    user =models.ForeignKey(User, verbose_name=_("User"), on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, verbose_name=_("Product"), on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(_("Qunatity"), default=1)
+    mode = models.CharField(_("Mode"), max_length=50,default=None)
+    date = models.DateTimeField(_("Date"), auto_now=True)
+    product_uid = models.CharField(_("Product Id"), max_length=30, default=None, null=True, blank=True)
+    def __str__(self):
+        return self.product.product_name
 
 class Ownership(models.Model):
     user = models.ForeignKey(User, verbose_name=_("User"),null=True, on_delete=models.SET_NULL)
-    product = models.ForeignKey(Product, verbose_name=_("Product"), related_name="who_own_the_product", on_delete=models.CASCADE, default=0)
+    product = models.ForeignKey(Product, verbose_name=_("Product"), related_name="who_own_the_product", on_delete=models.CASCADE, default=None, null=True, blank=True)
     status = models.CharField(_("Recycle Status"), max_length=10,choices=TRACK_STATUS, default="NO")
-    new_owner = models.ForeignKey(ProfileUser, verbose_name=_("New Owner"), on_delete=models.CASCADE, default=None)
+    new_owner = models.ForeignKey(ProfileUser, verbose_name=_("New Owner"), on_delete=models.CASCADE, default=None, null=True, blank=True)
     date = models.DateTimeField(_("Date"), auto_now=True)
     product_quantity = models.PositiveIntegerField(_("Quantity"), default=1)
     action = models.CharField(_("Action"), max_length=50, default=" ")
     product_uid = models.CharField(_("Product Id"), max_length=30, default=None, null=True, blank=True)
+    product_cart = models.ForeignKey(CartOwnerShip, verbose_name=_("Cart"), on_delete=models.CASCADE, default=None, null=True, blank=True)
     # Needs to be implemeted inorder to give the new user, a product qr code.
     # qr_code = models.FileField(_("QR Code"), upload_to="qr_codes/", blank=True)
 
@@ -145,7 +161,7 @@ class ReuseProducts(models.Model):
     product_quantity = models.IntegerField(_("Quantity"), default=1)
     product_catagories = models.CharField(_("Catagories"), max_length=3, choices=CHOICES_FOR_PRODUCTS, default="RU")
     product_description = models.TextField(_("Description"), blank=False, max_length=100)
-    product_condition = models.CharField(_("Condition"), max_length=50,choices=CONDITIONS_PRODUCTS_REUSE, default="Good")
+    product_condition = models.CharField(_("Condition"), max_length=50,choices=CODITIONS_PRODUCTS_REUSE, default="Good")
     product_image = models.ImageField(_("Image"), upload_to="product_images/", blank=False, null=False)
     product_address = models.TextField(_("Address"), max_length=50)
     product_price = models.DecimalField(_("Price"), max_digits=10, decimal_places=2, default=0) 
@@ -161,7 +177,8 @@ class Cart(models.Model):
     @property
     def total_cost(self):
         return self.quantity * self.product.product_price
-    
+
+
 class Customer(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(_("Full Name"), max_length=50)

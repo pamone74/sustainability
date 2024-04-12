@@ -25,13 +25,15 @@ SECRET_KEY = "django-insecure-182s&ff=4qx@z_hg(efkve&4p#v#ctiwqr%39ceoxzy=fe#l29
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["0.0.0.0","192.168.207.93"]
 
 
 # Application definition
 
 INSTALLED_APPS = [
     "myapp",
+    'corsheaders',
+    "rest_framework",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -39,11 +41,13 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 ]
-
+CSRF_COOKIES_SECURE= False
 MIDDLEWARE = [
+    
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
+    # 'corsheaders.middleware.CorsMiddleware',
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
@@ -106,7 +110,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = 'Asia/Dubai'
+TIME_ZONE = "UTC"
 
 USE_I18N = True
 
@@ -119,7 +123,7 @@ USE_TZ = True
 STATIC_URL = "static/"
 STATICFILE_DIRS= [os.path.join(BASE_DIR, 'static/')]
 STATIC_ROOT= os.path.join(BASE_DIR, 'static')
-LOGIN_REDIRECT_URL = '/dashboard_templates/dashboard/'
+LOGIN_REDIRECT_URL = '/index/'
 
 
 # Default primary key field type
@@ -131,9 +135,13 @@ LANGUGES = [
     ('fr', "French"),
     ('ar', "Arabic"),
 ]
-
+CORS_ORIGIN_ALLOW_ALL = True
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10
+}
