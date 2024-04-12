@@ -55,7 +55,7 @@ Add Product
 <div class="container my-5">
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
         <strong>Error!</strong> Your are not allowed to add product because your are a Consumer.
-        <p> If you want to add product please contact admin or Update your info here <a href="{% url "update_profile" request.user.id%}" class="text-end"> update </a><p>
+        <p> If you want to add product please contact admin or Update your info here <a href="{% url "information"%}" class="text-end"> update </a><p>
     </div>
 </div>
 {% else %}
@@ -63,7 +63,7 @@ Add Product
     <div class="container my-5">
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
             <strong>Error!</strong> Opps Create Your Profile First.
-            <p> Navigate to your Dashboard and create your profile or Update your info here <a href="{% url "create_profile"%}" class="text-end"> Create </a><p>
+            <p> Navigate to your Dashboard and create your profile or Update your info here <a href="{% url "information"%}" class="text-end"> Create </a><p>
         </div>
     </div>
 {% endif %}
