@@ -5,7 +5,7 @@
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="icon" href="{% static 'image/recycles.jpeg' %}" type="image/png">
+        <link rel="icon" href="{% static 'image/logo.png' %}" type="image/png">
         <title>{% block head_title %}Smart Bin {% endblock %}</title>
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
@@ -17,21 +17,25 @@
         <link rel="stylesheet" href="{% static 'vendors/owl-carousel/owl.carousel.min.css' %}">
         <!-- main css -->
         <link rel="stylesheet" href="{% static 'css/style.css' %}">
-        <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+        <link rel="stylesheet" href="{% static 'css/responsive.css' %}"> 
     </head>
+    <style>
+        
+    </style>
     <body>
         <!--================Header Area =================-->
         {% include "navbar.html" %}
         <!--================Header Area =================-->
         
         <!--================Banner Area =================-->
+        <!-- We need to chnage the bcakground i cannot find where but try-->
         <section class="banner_area">
             <div class="booking_table d_flex align-items-center">
             	<div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background=""></div>
 				<div class="container">
                     <div class="banner_content">
-                        <h2> Welcome to the Future of Waste Management</h2>
-                         <p>Smart Bin is a tech waste management company that leverages innovative technology to revolutionize the industry. 
+                        <h3 class="display-4"> Welcome to the Future of Waste <br>Management</h3>
+                         <p class="lead">Smart Bin is a tech waste management company that leverages innovative technology to revolutionize the industry. 
                              Our smart waste management system enhances efficiency, reduces costs, and minimizes environmental impact. 
                              We are committed to sustainability, employing cutting-edge technology to ensure a cleaner, greener future.</p>
                          <a href="#about" class="button_hover theme_btn_two">Learn More</a>

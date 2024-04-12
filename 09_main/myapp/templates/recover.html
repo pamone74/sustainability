@@ -3,7 +3,6 @@
 
 {% block title %}Recover{% endblock title %}
 
-{% block extra_css %}
 <style>
     .card {
         border-radius: 20px;
@@ -52,10 +51,10 @@
         border-color: rgba(0, 0, 0, 0.3);
     }
     
-    .card-body {
-        padding: 15px;
-        margin-top: auto; /* Align content to the bottom */
-    }
+    {% comment %} .card-body { {% endcomment %}
+        {% comment %} padding: 15px; {% endcomment %}
+        {% comment %} margin-top: auto; /* Align content to the bottom */ {% endcomment %}
+    {% comment %} } {% endcomment %}
     
     /* Body styling */
     body {
@@ -65,7 +64,6 @@
         background-size: contain;
     }
     </style>
-{% endblock extra_css %}
 
 {% block main-content %}
 <body>
@@ -83,7 +81,7 @@
     <div class="row">
         <div class="col-md-4">
             <div class="card">
-                <img src="{% static 'image/compost-waste.jpeg' %}" class="card-img-top" alt="...">
+                <img src="{% static 'image/compost-waste.jpeg' %}" class="card-img-top" alt="..." width=100% Height=200>
                 <div class="card-body crd">
                     <h5 class="text-start">Waste Composting</h5>
                     <p>Organic waste, such as food scraps and yard trimmings, can be composted to create nutrient-rich soil amendments</p>
@@ -96,7 +94,7 @@
 
         <div class="col-md-4">
             <div class="card">
-                <img src="{% static 'image/pyrolysis.jpeg' %}" class="card-img-top" alt="...">
+                <img src="{% static 'image/pyrolysis.jpeg' %}" class="card-img-top" alt="..." width=100% Height=200>
                 <div class="card-body crd">
                     <h5 class="text-start">Waste-to-Energy</h5>
                     <p>Non-recyclable and non-compostable items can be converted into energy through waste-to-energy technologies such as Pyrolysis and Gasification.</p>
@@ -108,8 +106,8 @@
         </div>
 
         <div class="col-md-4">
-            <div class="card">
-                <img src="{% static 'image/biological.jpeg' %}" class="card-img-top" alt="...">
+            <div class="card" >
+                <img src="{% static 'image/biological.jpeg' %}" class="card-img-top" alt="..." width=100% Height=200>
                 <div class="card-body crd">
                     <h5 class="text-start">Biological Recovery</h5>
                     <p>Wastewater and organic matter can undergo biological treatment processes to produce biogas or biofuels. Anaerobic digestion can produce methane-rich biogas.</p>
@@ -125,7 +123,7 @@
     <div class="row">
         <div class="col-md-4">
             <div class="card">
-                <img src="{% static 'image/recycle-recover.jpeg' %}" class="card-img-top" alt="...">
+                <img src="{% static 'image/recycle-recover.jpeg' %}" class="card-img-top" alt="..." width=100% Height=200>
                 <div class="card-body crd">
                     <h5 class="text-start">Search | Find | Recycle</h5>
                     <p>Search for recyclables, earn prizes, and collect reward points for your eco-friendly efforts. Join us today.</p>
@@ -138,7 +136,7 @@
 
         <div class="col-md-4">
             <div class="card">
-                <img src="{% static 'image/educate-reovery.jpeg' %}" class="card-img-top" alt="...">
+                <img src="{% static 'image/educate-reovery.jpeg' %}" class="card-img-top" alt="..." width=100% Height=200>
                 <div class="card-body crd">
                     <h5 class="text-start">Educate</h5>
                     <p>Educating on recovery and emission reduction is vital. Let's act for a sustainable future and a healthier planet. Join us!</p>
@@ -151,7 +149,7 @@
 
         <div class="col-md-4">
             <div class="card">
-                <img src="{% static 'image/reuse.jpeg' %}" class="card-img-top" alt="...">
+                <img src="{% static 'image/reuse.jpeg' %}" class="card-img-top" alt="..." width=100% Height=200>
                 <div class="card-body crd">
                     <h5 class="text-start">Reuse</h5>
                     <p>Do you have items you do not use anymore? Do not waste it, share it with those who need it. Promote sustainability by sharing your items.</p>
