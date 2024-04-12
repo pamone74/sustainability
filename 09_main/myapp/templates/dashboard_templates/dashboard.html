@@ -298,6 +298,9 @@
         ***********************************-->
 		<div class="deznav">
 			<div class="deznav-scroll">
+				{% if not_profile_user %}
+				<p  style="text-align:center;"><a href="{%url 'create_profile'%}"  style="color:red;"> Please Update your profile </a> </p>
+				{% endif %}
 				<ul class="metismenu" id="menu">
 					<li><a href="{% url 'create-tranfer'%}">
 						<i class="flaticon-bar-chart-1"></i>

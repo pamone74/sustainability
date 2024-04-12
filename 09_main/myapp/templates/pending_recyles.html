@@ -12,7 +12,11 @@
             <h2 class="text-end"> Total {{total}}</h2>
         </div>
         <br>
-        <p class="warning">Please Recycles this items to earn reward points</p>
+        {% if total %}
+        <p class="warning px-3">Please Recycles this items to earn reward points</p>
+        {% else %}
+        <p class="success px-3">Good job for maintainig clean Environment</p>
+        {% endif %}
     </div>
     <br>
     <div clas="row">

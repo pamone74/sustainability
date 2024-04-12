@@ -126,11 +126,13 @@ class Profileview(View):
 
 
 def Information(request):
-    info = ProfileUser.objects.get(user=request.user)
-    if info:
-        total = info.reuse_rewards + info.recycle_rewards + info.recover_rewards + info.reduce_rewards
-    else:
-        total = 0
+    try:
+        info = ProfileUser.objects.get(user=request.user)
+        if info:
+            total = info.reuse_rewards + info.recycle_rewards + info.recover_rewards + info.reduce_rewards
+    except ObjectDoesNotExist:
+        total = 0 
+        return HttpResponseRedirect("/create_profile/")
     return render(request, "information.html", locals())
 
 # This is a dummy view function just as a placeholder for the dashboard urls
@@ -150,12 +152,13 @@ def index(request):
 # ================= User Dashboard on login ==================================================================================================
 # ================= This is the user dashboard that will be displayed once the user logs in===================================================
 def dashboard(request):
-    profile = ProfileUser.objects.get(user=request.user)
-    total_points = profile.reuse_rewards + profile.recycle_rewards + profile.recover_rewards + profile.reduce_rewards
     try:
+        profile = ProfileUser.objects.get(user=request.user)
+        total_points = profile.reuse_rewards + profile.recycle_rewards + profile.recover_rewards + profile.reduce_rewards
         total_products = CartOwnerShip.objects.filter(user=request.user).count()
     except ObjectDoesNotExist:
         total_products = 0
+        return render(request, 'dashboard_templates/dashboard.html', {"total_products": total_products, "not_profile_user": True})
     return render(request, 'dashboard_templates/dashboard.html', locals())
 
 def create_product(request):
@@ -410,8 +413,11 @@ class CreateProduct(View):
                         product_pdf = generate_pdf(qr_code, f"{current_date}.pdf")
                         with open(product_pdf, "rb") as f:
                             form.instance.product_pdf.save(f"{current_date}{user}.pdf", f, save=True)
-                        shutil.move(qr_code_filename, "media/")
-                        os.remove(f"{current_date}.pdf")
+                        try:
+                            shutil.move(qr_code_filename, "media/")
+                            os.remove(f"{current_date}.pdf")
+                        except FileNotFoundError:
+                            pass
                         ownership = Ownership(user=request.user, product=form.instance, status="NO", new_owner=user, product_quantity=form.cleaned_data["product_quantity"], action="Added product", product_uid=unique_id)
                 cart_update = CartOwnerShip(user=request.user, product=form.instance,mode="Added Product", quantity = form.cleaned_data["product_quantity"], product_uid=unique_id)
 
@@ -468,7 +474,6 @@ class TransferProduct(View):
                 product = Product.objects.filter(product_name=chosen_product).first()
                 cart_product = CartOwnerShip.objects.filter(product=product).first()
                 if product:
-                    messages.warning(request, "Product cannot be none")
                     product_id = product.product_id
                 else:
                     return render(request, "transfer_product.html", locals())
@@ -499,10 +504,14 @@ class TransferProduct(View):
                 cart_update.save()
 
                 # Once the user has transfered the products, we need to delete it from him since the product has been transferedto another user
-
-                obj = CartOwnerShip.objects.filter(user=request.user, product=product_instance).first()
-                print(obj)
-                obj.delete()
+                try:
+                    obj = CartOwnerShip.objects.filter(user=request.user, product=product_instance).first()
+                    if obj:
+                        obj.delete()
+                    else:
+                        return render(request, "transfer_product.html", locals())
+                except ObjectDoesNotExist:
+                    pass
                 
                 messages.success(request, "Product Transfered")
                 return HttpResponseRedirect("/transfer/?transfer_product=True")

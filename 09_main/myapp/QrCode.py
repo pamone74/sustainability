@@ -51,7 +51,7 @@ def generate_item_list(item_name, item_description, num_items, ownership, status
             "item_ownership": ownership
         }
         items.append(item)
-        filename = generate_qr_code(item_name, item_description, random_number, ownership, status, f"{item_name}_{random_number}")
+        filename = generate_qr_code(item_name, item_description, random_number, ownership, status, f"{item_name}[{random_number}]")
         item["qr_filename"] = filename
     if num_items == 1:
         item = {
@@ -61,7 +61,7 @@ def generate_item_list(item_name, item_description, num_items, ownership, status
                     "item_status": status,
                     "item_ownership": ownership
         }
-        filename = generate_qr_code(item_name, item_description, random_number, ownership, status, f"{item_name}_\\[{random_number}\\]")
+        filename = generate_qr_code(item_name, item_description, random_number, ownership, status, f"{item_name}[{random_number}]")
         item["qr_filename"] = filename
         return item
     return items
