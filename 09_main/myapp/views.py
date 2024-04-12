@@ -140,9 +140,13 @@ def contact(request):
 
 class UpdateInformation(View):
     def get(self, request, pk):
-        obj = ProfileUser.objects.get(pk=pk)
-        form = ProfileForm(instance=obj)
-        return render(request, "update.html", locals())
+        try:
+            obj = ProfileUser.objects.get(pk=pk)
+            form = ProfileForm(instance=obj)
+            return render(request, "update.html", locals())
+        except ObjectDoesNotExist:
+            messages.warning(request, "Profile Not Found")
+            return HttpResponseRedirect("/create_profile/")
     def post(self, request, pk):
         obj = ProfileUser.objects.get(pk=pk)
         form = ProfileForm(request.POST, instance=obj)
