@@ -20,18 +20,18 @@
 {% block main-content %}
 
 <div class="container my-2 bg-light rounded-end p-5">
-    <div class="row justify-content-between">
+    <div class="row justify-content-between shadow p-4 rounded-end">
         <div class="col-auto">
-            <h3 class="display-7"> Welcome {{info.full_name}} to your Profile</h3>
+            <h4 class="display-7"> Welcome {{info.full_name}} to your Profile</h4>
         </div>
         <div class="col-auto">
-            <h3>Reward Points: {{total}}</h3>
+            <h4>Reward Points:<span style="color:green"> {{total}} pts</small></h4>
         </div>
     </div>
     <hr class="border border-danger opacity-50">
     <div class="row shadow p-5 bg-light rounded-end my-3">
         <div class="col-sm-3">
-            <ul class="list-group px-5 py-3">
+            <ul class="list-group ">
                 {% if info.profile_picture and info.profile_picture.url %}
                     <img src="{{info.profile_picture.url}}" alt="User" class="img-fluid " style="height: 100px; width: 100px; overflow: hidden; border-radius: 50%; margin: 0 auto; border: 1px solid #ccc; padding: 5px; background-color: #fff; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
                 {% endif %}

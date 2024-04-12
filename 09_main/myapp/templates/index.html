@@ -5,7 +5,7 @@
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="icon" href="{% static 'image/recycles.jpeg' %}" type="image/png">
+        <link rel="icon" href="{% static 'image/logo.png' %}" type="image/png">
         <title>{% block head_title %}Smart Bin {% endblock %}</title>
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
@@ -17,115 +17,130 @@
         <link rel="stylesheet" href="{% static 'vendors/owl-carousel/owl.carousel.min.css' %}">
         <!-- main css -->
         <link rel="stylesheet" href="{% static 'css/style.css' %}">
-        <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+        <link rel="stylesheet" href="{% static 'css/responsive.css' %}"> 
     </head>
+    <style>
+        
+    </style>
     <body>
         <!--================Header Area =================-->
         {% include "navbar.html" %}
         <!--================Header Area =================-->
-        
+        <style>#ft{margin-left:40%; margin-right: 40%;}</style>
         <!--================Banner Area =================-->
         <section class="banner_area">
             <div class="booking_table d_flex align-items-center">
             	<div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background=""></div>
 				<div class="container">
                     <div class="banner_content">
-                        <h2> Welcome to the Future of Waste Management</h2>
-                         <p>Smart Bin is a tech waste management company that leverages innovative technology to revolutionize the industry. 
+                        <h2 class="text-center"> Welcome to the Future of Waste Management</h2>
+                         <p class="text-center">Smart Bin is a tech waste management company that leverages innovative technology to revolutionize the industry. 
                              Our smart waste management system enhances efficiency, reduces costs, and minimizes environmental impact. 
                              We are committed to sustainability, employing cutting-edge technology to ensure a cleaner, greener future.</p>
-                         <a href="#about" class="button_hover theme_btn_two">Learn More</a>
+                         <a href="#" id ="ft" class="button_hover theme_btn_two">Learn More</a>
                      </div>
 				</div>
             </div>
-            
-
-           
 
         </section>
+        <!--==============
         <!--================Banner Area =================-->
         
         <!--================ Accomodation Area  =================-->
+        <!--Instead of talking about achievements, it better to first market out ideas as in the projects we are working on at a time-->
         <section id = "projects" class="accomodation_area section_gap">
             <div class="container">
                 <div class="section_title text-center">
-                    <h2 class="title_color">ACHIEVEMENTS</h2>
-                    <p>We celebrate our achievements and are proud to share lists of projects that we have done, </p>
+                    <h2 class="title_color">OUR PROJECTS</h2>
+                    <p>Our projects focus on using technology to tackle environmental issues and enhance daily living. From Smart Bins for efficient waste management to Smart Homes promoting sustainability, we explore sea ecosystems and educate on environmental 
+                    improvement. Join us in creating a greener, more sustainable future.</p>
                 </div>
                 <div class="row mb_30">
                     <div class="col-lg-3 col-sm-6">
-                        <div class="accomodation_item text-center">
+                        <div class="accomodation_item">
                             <div class="hotel_img">
-                                <img src="{% static 'image/room1.jpg' %}" alt="">
+                                <img src="{% static 'image/smartbin.png' %}" alt="" width=250 height=300>
                             </div>
-                            <a href="#"><h4 class="sec_h4">Intergrated waste sorting</h4></a>
-                            <h6>2024<small>/project - 01</small></h6>
+                            <a href="#"><h4 class="sec_h4">Smart Bin waste Collection</h4></a>
+                            <p class="text-start"> Our Smart Bin project aims to revolutionize waste management
+                             by implementing cutting-edge technology. Through sensors and intelligent sorting mechanisms, our Smart Bins can automatically classify and organize waste, promoting recycling and reducing environmental impact.</p>
+                            {% comment %} <h6 class="accomodation_item text-center">2024<small class="accomodation_item text-center">/project - 01</small></h6> {% endcomment %}
                         </div>
                     </div>
                     <div class="col-lg-3 col-sm-6">
-                        <div class="accomodation_item text-center">
+                        <div class="accomodation_item">
                             <div class="hotel_img">
-                                <img src="{% static 'image/room2.jpg' %}" alt="">
+                                <img src="{% static 'image/smart-home.jpeg' %}" alt="" width=250 height=300>
                             </div>
-                            <a href="#"><h4 class="sec_h4">Transporting hazardous waste</h4></a>
-                            <h6>2023<small>/project - 02</small></h6>
+                            <a href="#"><h4 class="sec_h4">Smart Home Energy Monitoring</h4></a>
+                            <p>With our Smart Home initiative, we're bringing the future of home automation into the present. From energy-efficient appliances to integrated security systems and smart climate control, we're creating 
+                            living spaces that are not only convenient but also eco-friendly and sustainable. </p>
+                            {% comment %} <h6>2023<small>/project - 02</small></h6> {% endcomment %}
                         </div>
                     </div>
                     <div class="col-lg-3 col-sm-6">
-                        <div class="accomodation_item text-center">
+                        <div class="accomodation_item">
                             <div class="hotel_img">
-                                <img src="{% static 'image/room3.jpg' %}" alt="">
+                                <img src="{% static 'image/drone.jpeg' %}" alt="" width=250 height=300>
                             </div>
-                            <a href="#"><h4 class="sec_h4">Waste to energy projects</h4></a>
-                            <h6>2021<small>/project - 03</small></h6>
+                            <a href="#"><h4 class="sec_h4">Sea Waste collection</h4></a>
+                            <p> Explore the depths of the ocean with our Sea Exploration project, where we employ drones for underwater waste collection. Using advanced technology, we delve into the ocean's mysteries, studying ecosystems and gaining insights into marine life and ocean health.
+                            Join us in our mission to protect and preserve our oceans for future generations.</p>
+                            {% comment %} <h6>2021<small>/project - 03</small></h6> {% endcomment %}
                         </div>
                     </div>
                     <div class="col-lg-3 col-sm-6">
-                        <div class="accomodation_item text-center">
+                        <div class="accomodation_item">
                             <div class="hotel_img">
-                                <img src="{% static 'image/room4.jpg' %}" alt="">
+                                <img src="{% static 'image/carbon.jpeg' %}" alt="" width=250 height=300>
                             </div>
-                            <a href="#"><h4 class="sec_h4">Treatment of wastewater</h4></a>
-                            <h6>2020<small>/project - 04 </small></h6>
+                            <a href="#"><h4 class="sec_h4">Carbon Footprint Tracking</h4></a>
+                            <p> Track your carbon footprint with our innovative tracking system. By monitoring and analyzing your daily activities, we help you understand your environmental impact and make informed decisions to reduce carbon emissions. Join us in the journey towards
+                             a more sustainable future by taking control of your carbon footprint today.</p>
+                            {% comment %} <h6>2020<small>/project - 04 </small></h6> {% endcomment %}
                         </div>
                     </div>
                 </div>
+  <hr>
             </div>
         </section>
+      
         <!--================ Accomodation Area  =================-->
         
         <!--================ Facilities Area  =================-->
+        <!--I have changed from Values to Themes by focusing just on oir theme as 4RS we have to ensure that we discuss these themes to the page visitors-->
         <section id ="themes" class="facilities_area section_gap">
             <div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background="">  
             </div>
             <div class="container">
                 <div class="section_title text-center">
-                    <h2 class="title_w">VALUES</h2>
-                    <p> Sustainability, Innovation, Responsibility, Conservation, Efficiency, Environmental Stewardship.</p>
+                    <h2 class="title_w">THEMES</h2>
+                    <p> Resusing, Reduce, Recover, Recycle.</p>
                 </div>
                 <div class="row mb_30">
                     <div class="col-lg-4 col-md-6">
                         <div class="facilities_item">
-                            <h4 class="sec_h4"></i>Sustainability</h4>
-                            <p>Sustainability drives our tech waste management company, forging eco-friendly solutions.</p>
+                            <h4 class="sec_h4"></i>Recycle.</h4>
+                            <p>For environmental sustainability, Recycling our priority.</p>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6">
                         <div class="facilities_item">
-                            <h4 class="sec_h4">Innovation</h4>
-                            <p>Pioneering breakthroughs reimagine waste, forging a cleaner, brighter tomorrow.</p>
+                            <h4 class="sec_h4">Reduce</h4>
+                            <p>By using smart Bin, Smart home device, we can reduce our footprint.</p>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6">
                         <div class="facilities_item">
-                            <h4 class="sec_h4"></i>Responsibility</h4>
-                            <p>As stewards of progress, we harness technology to safeguard our environment.</p>
+                            <h4 class="sec_h4"></i>Recover</h4>
+                            <p>Conserves the envrionment by discovering and recycling Be a Hero.</p>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6">
                         <div class="facilities_item">
-                            <h4 class="sec_h4">Conservation</h4>
-                            <p>Through ingenious technology, our company conserves resources, protecting our community's environment.</p>
+                            <h4 class="sec_h4">Reuse</h4>
+                            <p>Resusing the items we have, its one way we can save our environment. Do you have items you are not 
+                            using? share it with others.</p>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6">
@@ -151,12 +166,12 @@
                 <div class="row">
                     <div class="col-md-6 d_flex align-items-center">
                         <div class="about_content ">
-                            <h2 class="title title_color">About Us <br>Our History<br>Mission & Vision</h2>
+                            <h2 class="title title_color text-center">About Us <br>Our History<br>Mission & Vision</h2>
                             <p>At our core, founded in March 2024, we envisioned a future where waste management transcends efficiency. 
                                 Our mission is to revolutionize the industry, utilizing innovative technology to enhance efficiency and ensure 
                                 sustainability. Our vision drives us towards a world where the majority of waste is managed responsibly, 
                                 employing the principles of reuse, recycle, reduce, and recover.</p>
-                            <a href="#contact" class="button_hover theme_btn_two">Contact Us to Know More</a>
+                            <a href="#contact" class="button_hover theme_btn_two text-center">Contact Us to Know More</a>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -168,19 +183,21 @@
         <!--================ About History Area  =================-->
         
         <!--================ Testimonial Area  =================-->
+
+        <!-- Here you have to change to something meaningfulll, we are not operational at the moment, so the testimonies is not what we should talk about for a moment , or we can talk about what people says about waste management and challenges and our approach is to solve those challenges-->
         <section class="testimonial_area section_gap">
             <div class="container">
                 <div class="section_title text-center">
-                    <h2 class="title_color">Testimonial from our Clients</h2>
-                    <p>What our clients have to say about our products and technology</p>
+                    <h2 class="title_color">Review</h2>
+                    <p>What People say about our products, services and technology</p>
                 </div>
                 <div class="testimonial_slider owl-carousel">
                     <div class="media testimonial_item">
-                        <img class="rounded-circle" src="{% static 'image/testtimonial-1.jpg' %}" alt="">
+                        <img class="rounded-circle" src="{% static 'image/image.jpg' %}" alt="">
                         <div class="media-body">
-                            <p>Thrilled with the smart waste management system! It's streamlined our operations, reduced costs, 
-                                and minimized our environmental footprint. Couldn't be happier with the results!</p>
-                            <a href="#"><h4 class="sec_h4">Rod Boston</h4></a>
+                            <p>The smart bin waste management system has the potential to revolutionize how we handle waste by optimizing collection routes, reducing operational costs, and improving recycling rates. Equipped with sensors and real-time data analytics,
+                                 smart bins can monitor fill levels and notify waste management services when they need to be emptied. </p>
+                            <a href="#"><h4 class="sec_h4">Khalid Osama</h4></a>
                             <div class="star">
                                 <a href="#"><i class="fa fa-star"></i></a>
                                 <a href="#"><i class="fa fa-star"></i></a>
@@ -191,10 +208,10 @@
                         </div>
                     </div>    
                     <div class="media testimonial_item">
-                        <img class="rounded-circle" src="{% static 'image/testtimonial-1.jpg' %}" alt="">
+                        <img class="rounded-circle" src="{% static 'image/image.jpg' %}" alt="">
                         <div class="media-body">
-                            <p>Using the smart waste management system has been transformative for our operations. We've seen a significant reduction in waste output and a noticeable improvement in efficiency. It's not just about managing waste; it's about optimizing resources and contributing to a cleaner environment. 
-                                We're thrilled with the results and look forward to continuing this sustainable journey. </p>
+                            <p>Unlocking the future of waste management, a smart bin system integrates cutting-edge technology to revolutionize how we handle waste. By leveraging real-time data, predictive analytics, and automation, it optimizes collection routes, minimizes overflow, and maximize
+                                 resource efficiency, paving the way for a cleaner, greener, and more sustainable environment. </p>
                             <a href="#"><h4 class="sec_h4">Ronald Kim</h4></a>
                             <div class="star">
                                 <a href="#"><i class="fa fa-star"></i></a>
@@ -206,11 +223,11 @@
                         </div>
                     </div>
                     <div class="media testimonial_item">
-                        <img class="rounded-circle" src="{% static 'image/testtimonial-1.jpg' %}" alt="">
+                        <img class="rounded-circle" src="{% static 'image/image.jpg' %}" alt="">
                         <div class="media-body">
-                            <p>With the smart waste management system, our efficiency skyrocketed, costs plummeted, 
-                                and environmental impact significantly decreased. Couldn't be happier!</p>
-                            <a href="#"><h4 class="sec_h4">Bobby Kyle</h4></a>
+                            <p>This technology-driven approach not only minimizes environmental impact and reduces operational costs but also provides valuable insights for strategic planning and urban development. Through real-time monitoring and 
+                                intelligent decision-making, smart bins pave the way for cleaner, smarter, and more sustainable cities.</p>
+                            <a href="#"><h4 class="sec_h4">Ojara Martin</h4></a>
                             <div class="star">
                                 <a href="#"><i class="fa fa-star"></i></a>
                                 <a href="#"><i class="fa fa-star"></i></a>
@@ -221,11 +238,11 @@
                         </div>
                     </div>    
                     <div class="media testimonial_item">
-                        <img class="rounded-circle" src="{% static 'image/testtimonial-1.jpg' %}" alt="">
+                        <img class="rounded-circle" src="{% static 'image/image.jpg' %}" alt="">
                         <div class="media-body">
-                            <p>After implementing the smart waste management system, our client expressed sheer satisfaction, citing streamlined operations, reduced costs, and a notable decrease in environmental impact. They described it as a game-changer in their sustainability efforts,
-                                 fostering confidence in their commitment to responsible waste management. </p>
-                            <a href="#"><h4 class="sec_h4">Brian Khaby</h4></a>
+                            <p>This intelligent approach leads to cleaner cities, less environmental impact, 
+                                and improved overall efficiency, creating a more sustainable and connected urban living environment.</p>
+                            <a href="#"><h4 class="sec_h4">James Khaby</h4></a>
                             <div class="star">
                                 <a href="#"><i class="fa fa-star"></i></a>
                                 <a href="#"><i class="fa fa-star"></i></a>
@@ -259,7 +276,7 @@
                             </div>
                             <div class="info_item">
                                 <i class="lnr lnr-phone-handset"></i>
-                                <h6><a href="#">+971 5475 9865 </a></h6>
+                                <h6><a href="tel:+97154759865" class="Blondie">+971 5475 9865 </a></h6>
                                 <p>Mon to Fri 9am to 6 pm</p>
                             </div>
                             <div class="info_item">
@@ -270,7 +287,7 @@
                         </div>
                     </div>
                     <div class="col-md-9">
-                        <form class="row contact_form" action="#" method="post" id="contactForm" novalidate="novalidate">
+                        <form class="row contact_form" action="#" id="contactForm" novalidate="novalidate">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name">
@@ -296,58 +313,62 @@
             </div>
         
         <!--================ Latest Blog Area  =================-->
+        <!--About Partners, we do not have any but we are hoping to partner with leading tech companies and gov't'-->
         <section class="latest_blog_area section_gap">
             <div class="container">
                 <div class="section_title text-center">
                     <h2 class="title_color">Our Partners </h2>
-                    <p>Explore our valued partnerships, driving innovation and mutual success.</p>
+                    <p>
+
+Though not yet operational, our aspirations include partnering with 
+municipalities and waste management companies. Together, we aim to revolutionize waste management practices for a cleaner, more sustainable future. Join us in envisioning impactful collaborations that benefit communities and the environment alike.</p>
                 </div>
                 <div class="row mb_30">
                     <div class="col-lg-4 col-md-6">
                         <div class="single-recent-blog-post">
-                            <div class="thumb">
-                                <img class="img-fluid" src="{% static 'image/blog/blog-1.jpg' %}" alt="post">
+                            <div class="thumb" style="width:250px; height:100px;">
+                                <img class="img-fluid" src="{% static 'image/Abu_Dhabi_City_Municipality_logo.jpeg' %}" alt="post" width=250 Height=300>
                             </div>
                             <div class="details">
                                 <div class="tags">
-                                    <a href="#" class="button_hover tag_btn">Hazardous Waste Management Company</a>
+                                    <a href="#" class="button_hover tag_btn">Municipality</a>
                                 </div>
-                                <a href="#"><h4 class="sec_h4"> Master Skip</h4></a>
-                                <p>Established in 2008, Master Skip is one of the hazardous waste management companies in the UAE. An ISO accredited organization
-                                    and approved by Dubai Municipality, Master Skip provides a range of skips for waste collection purposes.</p>
+                                <a href="#"><h4 class="sec_h4"> Abu Dhabi Municipality</h4></a>
+                                <p>Our vision includes partnering with esteemed entities like Abu Dhabi Municipality. Together,
+                                 we aspire to revolutionize waste management practices for a cleaner, more sustainable future in the region.</p>
         
                             </div>	
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6">
                         <div class="single-recent-blog-post">
-                            <div class="thumb">
-                                <img class="img-fluid" src="{% static 'image/blog/blog-2.jpg' %}" alt="post">
+                            <div class="thumb" style="width:250px; height:100px;">
+                                <img class="img-fluid" src="{% static 'image/tadweer.png' %}" alt="post" width=250 Height=300>
                             </div>
                             <div class="details">
                                 <div class="tags">
-                                    <a href="#" class="button_hover tag_btn">water jetting</a>
-                                    <a href="#" class="button_hover tag_btn">tank cleaning</a>
+                                    <a href="#" class="button_hover tag_btn">Waste Management</a>
+                                    {% comment %} <a href="#" class="button_hover tag_btn">tank cleaning</a> {% endcomment %}
                                 </div>
-                                <a href="#"><h4 class="sec_h4">GLOBALEX GROUP OF COMPANIES</h4></a>
-                                <p>Globalex is one of the few organizations providing a comprehensive one-window solution for waste management. Established in 2006, 
-                                    the company provides comprehensive transportation, removal and disposal services.</p>
+                                <a href="#"><h4 class="sec_h4">TADWEER WASTE MANAGEMENT</h4></a>
+                                <p>We are ambitious to partner with leading organizations such as Tadweer Waste Management Company. 
+                                Together, we aim to revolutionize waste management practices for a cleaner, more sustainable future</p>
                     
                             </div>	
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6">
                         <div class="single-recent-blog-post">
-                            <div class="thumb">
-                                <img class="img-fluid" src="{% static 'image/blog/blog-3.jpg' %}" alt="post">
+                            <div class="thumb" style="width:250px; height:100px;">
+                                <img class="img-fluid" src="{% static 'image/averda.png' %}" alt="post" width=250 Height=300 style="margin-top:-55px">
                             </div>
                             <div class="details">
                                 <div class="tags">
                                     <a href="#" class="button_hover tag_btn">specialist healthcare waste management solutions.</a>
                                 </div>
                                 <a href="#"><h4 class="sec_h4">AVERDA WASTE MANAGEMENT</h4></a>
-                                <p>Founded in 1970, Averda has established it’s reputation in over 34 cities across the world as a reliable partner for waste management, sanitization and hazardous material removal and disposal. 
-                                    It is one of the most popular industrial waste management companies in Dubai. </p>
+                                <p>Our aspirations include partnering with esteemed organizations like Averda Waste Management Company. Together,
+                                we aim to revolutionize waste management practices for a cleaner, more sustainable future. </p>
                         
                             </div>	
                         </div>
@@ -366,7 +387,8 @@
                     <div class="col-lg-3  col-md-6 col-sm-6">
                         <div class="single-footer-widget">
                             <h6 class="footer_title">About Our Work</h6>
-                            <p>The world has become so fast paced that people don’t want to stand by reading a page of information, they would much rather look at a presentation and understand the message. It has come to a point </p>
+                            <p>Discover our pioneering work in sustainability.
+                             From Smart Bins to sea waste collection drones, we're dedicated to innovative solutions for a greener future. Join us in shaping a sustainable tomorrow.</p>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6 col-sm-6">
@@ -383,10 +405,10 @@
                                 </div>
                                 <div class="col-4">
                                     <ul class="list_style">
-                                        <li><a href="{% url 'index' %}">Home</a></li>
+                                        <li><a href="{% url 'register' %}">Register</a></li>
                                         <li><a href="#contact">Contact</a></li>
                                         <li><a href="{% url 'login' %}">Login</a></li>
-                                        <li><a href="#contact">Contact</a></li>
+                                        <li><a href="{% url 'contact' %}">Message</a></li>
                                     </ul>
                                 </div>										
                             </div>							
@@ -426,7 +448,7 @@
                 <div class="border_line"></div>
                 <div class="row footer-bottom d-flex justify-content-between align-items-center">
                     <p class="col-lg-8 col-sm-12 footer-text m-0">
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved.
+Copyright &copy;<script>document.write(new Date().getFullYear());</script>  4Rs Waste Management All rights reserved.
                     <div class="col-lg-4 col-sm-12 footer-social">
                         <a href="#"><i class="fa fa-facebook"></i></a>
                         <a href="#"><i class="fa fa-twitter"></i></a>

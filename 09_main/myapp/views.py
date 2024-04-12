@@ -467,7 +467,11 @@ class TransferProduct(View):
                 chosen_product_qty = form.cleaned_data["product_quantity"]
                 product = Product.objects.filter(product_name=chosen_product).first()
                 cart_product = CartOwnerShip.objects.filter(product=product).first()
-                product_id = product.product_id
+                if product:
+                    messages.warning(request, "Product cannot be none")
+                    product_id = product.product_id
+                else:
+                    return render(request, "transfer_product.html", locals())
                 if chosen_product_qty == 0:
                     messages.warning(request, "Quantity cannot be 0")
                     return render(request,"transfer_product.html", locals())
