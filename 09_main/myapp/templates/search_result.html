@@ -4,6 +4,7 @@
 {% block title %}Search Result{% endblock title %}
 {% block main-content %}
 <style>
+    /* Search bar styling */
     .search_bar {
         width: 400px;
         float: right;
@@ -16,39 +17,49 @@
         }
     }
 
-    /* Animate card hover */
+    /* Card styling */
     .card {
         transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
     .card:hover {
-        transform: scale(1.2) rotate(10deg); /* Increase size and rotate */
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+        transform: scale(1.05);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     }
 
-    /* Animation for card movement on hover */
-    .card:hover {
-        animation: moveLeftRight 0.5s ease infinite alternate;
-    }
-
-    @keyframes moveLeftRight {
-        0% {
-            transform: translateX(0);
-        }
-        100% {
-            transform: translateX(5px); /* Change this value to adjust the distance */
-        }
-    }
-
-    /* Center images within cards */
+    /* Image styling */
     .card-img-top {
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        max-width: 100%;
-        height: auto;
+        width: 100%;  /* Ensure the image spans the width of the card */
+        height: 200px; /* Set the height of the image */
+        object-fit: cover; /* Maintain aspect ratio and fit the image */
+    }
+
+    /* Card container styling */
+    .card-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    /* Style each card */
+    .card-container .card {
+        width: 18%; /* Each card takes up 18% of the container's width (5 cards in a row) */
+        margin: 10px;
+    }
+
+    /* Center text in card body */
+    .card-body {
+        text-align: center;
+    }
+
+    /* Adjustments for smaller screens */
+    @media screen and (max-width: 768px) {
+        .card-container .card {
+            width: 48%; /* Adjust the width for smaller screens (2 cards per row) */
+        }
     }
 </style>
+
 <br>
 <div class="search_bar">
     <form class="d-flex" method="POST" action="{% url 'search_result'%}">
@@ -57,30 +68,33 @@
         <button class="btn btn-outline-success" type="submit">Search</button>
     </form>
 </div>
+
 <br>
+
 <div class="">
     <div class="">
         <div class="">
             {% if product %}
-            <h4 class ="text-center text-success"> Search Results for : {{ searched|capfirst }}</h4>
-            <div class="row">
-                {% for items in product %}
-                <div class="col-lg-2 col-md-4 col-sm-6">
-                    <div class="card">
-                        <a href="{% url 'details' items.id%}"><img src="{{ items.product_image.url }}" class="card-img-top" alt="..."></a>
-                        <div class="card-body">
-                            <a href="#" style="text-decoration:none;color:black;"><h5 class="card-title">{{ items.product_name }}</h5></a>
+                <h4 class="text-center text-success"> Search Results for : {{ searched|capfirst }}</h4>
+                <div class="card-container">
+                    {% for items in product %}
+                        <div class="card">
+                            <a href="{% url 'details' items.id%}"><img src="{{ items.product_image.url }}" class="card-img-top" alt="..."></a>
+                            <div class="card-body">
+                                <a href="#" style="text-decoration:none;color:black;">
+                                    <h5 class="card-title">{{ items.product_name }}</h5>
+                                </a>
+                            </div>
                         </div>
-                    </div>
+                    {% endfor %}
                 </div>
-                {% endfor %}
-            </div>
-        {% else %}
-        <br>
-        <div class="alert alert-danger text-center" role="alert">
-            <h4>No result found</h4>
+            {% else %}
+                <br>
+                <div class="alert alert-danger text-center" role="alert">
+                    <h4>No result found</h4>
+                </div>
+            {% endif %}
         </div>
-        {% endif %}
     </div>
 </div>
-{% endblock main-content%}
+{% endblock main-content %}

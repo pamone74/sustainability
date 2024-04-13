@@ -5,46 +5,48 @@
 {% block main-content %}
 <div class="container my-5">
     <div class="row">
-        <div class="col-sm-6 ">
+        <div class="col-md-6 mb-4">
             <h2 class="display-6">Create Product</h2>
-            <p class="lead">Create your Product, Qr code will be generated, track the cycle of your products.</p>
+            <p class="lead">Create your Product. QR code will be generated, track the cycle of your products.</p>
             <a href="{% url 'create' %}" class="btn btn-primary">Create Now</a>
         </div>
         
-        <div class="col-sm-6">
+        <div class="col-md-6 mb-4">
             <h2 class="display-6">Sell Or Transfer Ownership</h2>
-            <p class="lead">Transfer your Product, Qr code will be generated, track the cycle of your products.</p>
+            <p class="lead">Transfer your Product. QR code will be generated, track the cycle of your products.</p>
             <a href="{% url 'transfer' %}" class="btn btn-primary">Transfer Now</a>
         </div>
     </div>
-    <br>
-<br>
-    <div clas="row">
-        <h1 class="display-6 text-center">My carts Products</h1>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Product Name</th>
-                    <th>Quantity</th>
-                    <th>Mode</th>
-                    <th>Product ID</th>
-                    <th>Date</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for product in items %}
-                <tr>
-                    <td>{{ product.product }}</td>
-                    <td>{{ product.quantity }}</td>
-                    <td>{{ product.mode }}</td>
-                    {% comment %} <td><img src="{{ product.product_qr_code }}" alt="Qr
-Code" width="100" height="100"></td> {% endcomment %}
-                    <td>{{ product.product_uid }}</td>
-                    <td>{{ product.date }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-            </table>
+    
+    <div class="row my-4">
+        <div class="col-12">
+            <h1 class="display-6 text-center mb-3">My Cart Products</h1>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Product Name</th>
+                            <th>Quantity</th>
+                            <th>Mode</th>
+                            <th>Product ID</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for product in items %}
+                        <tr>
+                            <td>{{ product.product }}</td>
+                            <td>{{ product.quantity }}</td>
+                            <td>{{ product.mode }}</td>
+                            {% comment %} <td><img src="{{ product.product_qr_code }}" alt="QR Code" width="100" height="100"></td> {% endcomment %}
+                            <td>{{ product.product_uid }}</td>
+                            <td>{{ product.date }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock main-content %}

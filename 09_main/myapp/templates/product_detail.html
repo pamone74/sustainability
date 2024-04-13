@@ -4,41 +4,65 @@
 
 {% block extra_css %}
 <style>
+    /* Custom styling for product details */
     .product-details {
         margin-top: 50px;
     }
+    
+    /* Set the image width to 25% */
     .product-details img {
-        max-width: 100%;
+        width: 25%; /* Set the image width to 25% */
         height: auto;
+        display: block; /* Ensure image is displayed as a block element */
+        margin-bottom: 20px; /* Add some spacing below the image */
     }
-    .product-details .product-description {
+    
+    /* Styles for product description and buttons */
+    .product-description, .product-category, .product-address {
+        text-align: left; /* Align text to the left */
+    }
+
+    /* Style buttons */
+    .btn-container {
         margin-top: 20px;
+        display: flex; /* Use flex to layout the buttons */
+        flex-direction: column; /* Arrange the buttons vertically */
+        align-items: center; /* Center align the buttons */
     }
-    .product-details .btn-container {
-        margin-top: 20px;
+
+    /* Add spacing between buttons */
+    .btn-container button,
+    .btn-container a {
+        margin-bottom: 10px;
     }
+    
+
 </style>
 {% endblock extra_css %}
 
 {% block main-content %}
 <div class="container my-5 product-details">
     <div class="row">
+        <!-- Image column -->
         <div class="col-sm-2">
-            <img src="{{ product.product_image.url }}" class="img-fluid" alt="{{ product.name }}">
+            <img src="{{ product.product_image.url }}" alt="{{ product.name }}" class="img-fluid product-details">
         </div>
+        
+        <!-- Texts column -->
         <div class="col-sm-8">
             <h2>{{ product.product_name }}</h2>
             <p class="product-description">{{ product.product_description }}</p>
-            <p>Category: {{ product.get_product_catagories_display }}</p>
-            <p>Address: {{ product.product_address }}</p>
+            <p class="product-category">Category: {{ product.get_product_catagories_display }}</p>
+            <p class="product-address">Address:  {{ product.product_address }}</p>
         </div>
+        
+        <!-- Buttons column -->
         <div class="col-sm-2 btn-container">
             <form action="/add-to-cart" class="d-inline">
-                <input type="hidden" name="pro_id" value={{product.id}}/>
+                <input type="hidden" name="pro_id" value="{{ product.id }}">
                 <button type="submit" class="btn btn-primary shadow px-5 py-2">Add to Cart</button>
             </form>
-            <br>
-            <a href="{% url 'reuse' %}" class="btn btn-success px-5 py-2 mt-3">Order Now</a>
+            <a href="{% url 'cart' %}"  class="btn btn-success px-5 py-2 mt-3">Order Now</a>
         </div>
     </div>
 </div>
