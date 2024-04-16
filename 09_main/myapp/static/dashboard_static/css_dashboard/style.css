@@ -4,8 +4,6 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto:400,500,700");
 @import url("https://fonts.googleapis.com/css?family=Nunito:400,600,700");
 @import url(css_dashboard/all.min.css);
-@import url(css_dashboard/simple-line-icons.min.css);
-@import url(css_dashboard/materialdesignicons.min.css);
 @import url(css_dashboard/line-awesome.min.css);
 @import url(css_dashboard/style.css);
 @import url(icons/flaticon/flaticon.css);
@@ -15,7 +13,6 @@
 @import url(animate/animate.min.css);
 @import url(aos/aos.min.css);
 @import url(perfect-scrollbar/css/perfect-scrollbar.css);
-@import url(metismenu/css/metisMenu.min.css);
 
 :root {
   --primary: #4169E1;

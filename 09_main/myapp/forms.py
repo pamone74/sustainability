@@ -137,7 +137,7 @@ class ReuseProductForm(ModelForm):
             "product_condition": forms.Select(attrs={"class":"form-control", "placeholder":"Enter Product Condition"}),
             "product_image": forms.FileInput(attrs={"class":"form-control", "placeholder":"Enter Product Image"}),
             "product_description": forms.Textarea(attrs={"class":"form-control", "placeholder":"Enter Product Description"}),
-            "product_address": forms.Textarea(attrs={"class":"form-control", "placeholder":"Enter Product Address"}),
+            "product_address": forms.TextInput(attrs={"class":"form-control", "placeholder":"Enter Product Address"}),
         }
 
 
