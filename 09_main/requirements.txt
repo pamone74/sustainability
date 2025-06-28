@@ -1,0 +1,10 @@
+# Core Framework
+Django>=4.0
+djangorestframework>=3.14
+
+# QR code, PDF, and Image handling (used in your QrCode module, if applicable)
+qrcode
+reportlab
+PyPDF2
+opencv-python
+pillow
