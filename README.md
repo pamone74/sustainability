@@ -75,7 +75,7 @@ Welcome to **SmartBin**, a cutting-edge sustainability project powered by **IoT*
 
 ```bash
 git clone https://github.com/your-org/smartbin.git
-cd smartbin
+cd sustainability
 python -m venv env
 source env/bin/activate
 pip install -r requirements.txt
